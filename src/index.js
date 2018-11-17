@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
+import CharacterCard from './CharacterCard'
 
-ReactDOM.render(<index>hello world</index>, document.getElementById('root'));
+ReactDOM.render(<CharacterCard/>, document.getElementById('root'));
 
