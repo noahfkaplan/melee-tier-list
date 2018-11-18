@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import CharacterCard from './CharacterCard'
+import CharacterSelectionGrid from './CharacterSelectionGrid'
 
-ReactDOM.render(<CharacterCard/>, document.getElementById('root'));
+ReactDOM.render(<CharacterSelectionGrid/>, document.getElementById('root'));
 

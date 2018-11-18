@@ -1,8 +1,12 @@
 import React from 'react';
 import Draggable from 'react-draggable';
-import fox from './characterIcons/fox.jpg'
 
 export default class CharacterCard extends React.Component{
+    constructor(props){
+        super(props);
+        this.characterName = props.name;
+        this.characterImg = require(`./characterIcons/${this.characterName}.png`)
+    }
     preventDragHandler = (e) => {
         e.preventDefault();
     }      
@@ -13,14 +17,11 @@ export default class CharacterCard extends React.Component{
             handle=".handle"
             defaultPosition={{x: 0, y: 0}}
             position={null}
-            grid={[25, 25]}
             onStart={this.handleStart}
             onDrag={this.handleDrag}
             onStop={this.handleStop}>
             <div className="handle">
-                <div className="square">
-                    <img src={fox} className = "characterIcon" alt ="Fox" onDragStart = {this.preventDragHandler}/>
-                </div>
+                <img  className = "characterIcon" src={this.characterImg} alt ="Fox" onDragStart = {this.preventDragHandler}/>
             </div>
             </Draggable>
         );
