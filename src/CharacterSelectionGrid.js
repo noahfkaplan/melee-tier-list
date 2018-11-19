@@ -9,20 +9,20 @@ export default class CharacterSelectionGrid extends React.Component{
         "pichu","pikachu","jigglypuff","mewtwo","gnw","marth","roy"];
     }
     getCharacterIcons(){
-        return(
-            this.characterList.map((name) => {
-                return (
-                  <ul key={name}>
-                    <CharacterCard name ={name}/>
-                  </ul>
-                );
-            })
-        );
+        let icons = this.characterList.map((name) => {
+            return (
+                <CharacterCard key={name} name ={name}/>
+            );
+        })
+        icons.splice(18,0, <div/>); //hacky way of creating an empty space at the start of the third row
+        return icons;
     }
     render(){
         return(
-            <div className = "characterSelectionGrid">
-                {this.getCharacterIcons()}
+            <div className = "characterSelectionWindow">    
+                <div className = "characterSelectionGrid">
+                    {this.getCharacterIcons()}
+                </div>
             </div>
         );    
     }
