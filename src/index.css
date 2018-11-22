@@ -35,3 +35,14 @@ code {
   grid-row-start: 2;
   grid-column-start: 2;
 }
+.mainGridWrapper{
+  display:grid;
+  grid-template-columns: 1fr 5fr;
+}
+.rightSideMenu{
+  background-color: blue;
+}
+.contentBody{
+  display:grid;
+  grid-template-rows: 2fr 1fr;
+}
