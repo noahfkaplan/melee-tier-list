@@ -18,8 +18,8 @@ export default class CharacterSelectionGrid extends React.Component{
         return icons;
     }
     render(){
-        return(
-            <div className = "characterSelectionWindow">    
+        return(   
+            <div>
                 <div className = "characterSelectionGrid">
                     {this.getCharacterIcons()}
                 </div>
