@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import CharacterSelectionGrid from './CharacterSelectionGrid'
+import WindowGrid from './WindowGrid'
 
-ReactDOM.render(<CharacterSelectionGrid/>, document.getElementById('root'));
+ReactDOM.render(<WindowGrid/>, document.getElementById('root'));
 
