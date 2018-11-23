@@ -12,35 +12,43 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
-.characterIcon{
+.characterImg{
   height: 75px;
   width:75px;
   border-style: solid;
   border-color: white;
   border-radius: 8px;
 }
+.characterIcon{
+  height: 33%;
+  width: 11%;
+  min-width: 80px;
+}
 .characterSelectionGrid{
-  display: grid;
-  grid-template-columns: repeat(9,80px);
-  grid-template-rows: repeat(3,80px);
-  padding: 25px;
-  background-color: rgb(30, 32, 32);
+  display: flex;
+  align-self: center;
+  flex-direction: row;
+  flex-wrap: wrap;
   justify-content: center;
+  padding: 25px;
+  max-width: 750px;
+
 }
 .mainGridWrapper{
   display:grid;
   grid-template-columns: 1fr 5fr;
 }
 .rightSideMenu{
-  background-color: blue;
+  /* to do*/
 }
+
 .contentBody{
-  display:grid;
-  grid-template-rows: 2;
-  align-content: center;
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: rgb(30, 32, 32);
 }
 .tierListRow{
-  background-color: lightblue;
   height: 80px;
   border: 1px solid black;
 }

@@ -1,7 +1,7 @@
 import React from "react"
 import ReactDOM from "react-dom"
 import CharacterCard from "./CharacterCard"
-import { fireEvent, getByAltText, render } from "react-testing-library";
+import { fireEvent, render } from "react-testing-library";
 
 describe("Character Card", function(){
     it("renders  without crashing", function(){

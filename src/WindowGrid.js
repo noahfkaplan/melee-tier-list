@@ -1,5 +1,5 @@
 import React from "react"
-import CharacterSelectionGrid from "./CharacterSelectionGrid"
+import CharacterSelectionGrid from "./CharacterSelectionGrid/CharacterSelectionGrid"
 import TierListChart from "./TierListChart"
 
 export default function WindowGrid(){

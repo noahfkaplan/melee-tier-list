@@ -1,5 +1,5 @@
 import React from 'react';
-import CharacterCard from './CharacterCard/CharacterCard';
+import CharacterCard from "../CharacterCard/CharacterCard";
 
 export default class CharacterSelectionGrid extends React.Component{
     constructor(props){
@@ -11,18 +11,17 @@ export default class CharacterSelectionGrid extends React.Component{
     getCharacterIcons(){
         let icons = this.characterList.map((name) => {
             return (
-                <CharacterCard key={name} name ={name}/>
+                <div className = "characterIcon" key = {name}>
+                    <CharacterCard name ={name}/>
+                </div>
             );
         })
-        icons.splice(18,0, <div/>); //hacky way of creating an empty space at the start of the third row
         return icons;
     }
     render(){
         return(   
-            <div>
-                <div className = "characterSelectionGrid">
-                    {this.getCharacterIcons()}
-                </div>
+            <div className = "characterSelectionGrid">
+                {this.getCharacterIcons()}
             </div>
         );    
     }
