@@ -1,5 +1,5 @@
 import React from 'react';
-import CharacterCard from './CharacterCard';
+import CharacterCard from './CharacterCard/CharacterCard';
 
 export default class CharacterSelectionGrid extends React.Component{
     constructor(props){
