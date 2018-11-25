@@ -10,7 +10,9 @@ export default class CharacterSelectionGrid extends React.Component{
         let icons = this.characterList.map((name) => {
             return (
                 <div className = "characterIcon" key = {name}>
-                    <CharacterCard name ={name} onMouseUp = {() => this.props.onMouseUp(name)}/>
+                    <CharacterCard 
+                        name ={name} 
+                        onClick = {() => this.props.onClick(name)}/>
                 </div>
             );
         })
@@ -18,7 +20,7 @@ export default class CharacterSelectionGrid extends React.Component{
     }
     render(){
         return(   
-            <div className = "characterSelectionGrid">
+            <div className = "characterSelectionGrid" /*onMouseOver = {() => this.props.onMouseOver()}*/>
                 {this.getCharacterIcons()}
             </div>
         );    
