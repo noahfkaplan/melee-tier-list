@@ -49,6 +49,8 @@ code {
   background-color: rgb(30, 32, 32);
 }
 .tierListRow{
+  display:flex;
+  flex-direction: row;
   height: 80px;
   border: 1px solid black;
 }

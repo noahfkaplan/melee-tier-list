@@ -6,7 +6,6 @@ export default class CharacterCard extends React.Component{
         super(props);
         this.characterName = props.name;
         this.characterImg = require(`../characterIcons/${this.characterName}.png`);
-        this.onmouseup = this.props.onmouseup;
     }
     preventDragHandler = (e) => {
         e.preventDefault();
@@ -21,7 +20,7 @@ export default class CharacterCard extends React.Component{
             onStart={this.handleStart}
             onDrag={this.handleDrag}
             onStop={this.handleStop}>
-            <div className="handle" onmouseup = {() => this.onmouseup()}>
+            <div className="handle" onMouseUp = {() => this.props.onMouseUp()}>
                 <img  className = "characterImg" src={this.characterImg} alt={this.characterName} onDragStart = {this.preventDragHandler}/>
             </div>
             </Draggable>

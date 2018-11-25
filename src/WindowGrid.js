@@ -7,7 +7,7 @@ export default class WindowGrid extends React.Component{
         super(props);
         this.state = {
             currectCharacter : null,
-            currentTierGridRow : 5,
+            currentTierGridRow : 0,
             inSelectionGrid : ["drmario","mario","luigi","bowser","peach","yoshi","dk","falcon","ganon",
             "falco","fox","ness","iceclimbers","kirby","samus","sheik","link","younglink",
             "pichu","pikachu","jigglypuff","mewtwo","gnw","marth","roy"],
@@ -32,7 +32,7 @@ export default class WindowGrid extends React.Component{
             inSelectionGrid.push(currentCharacter);
         }
         else{
-            inTierListGrid[currentCharacter] = this.state.currentTierGridRow;
+            inTierListGrid.push([currentCharacter,this.state.currentTierGridRow]);
         }
         this.setState({
             inSelectionGrid: inSelectionGrid,
@@ -40,26 +40,28 @@ export default class WindowGrid extends React.Component{
             currentCharacter: null
         });
     }
-    onmouseup(name){
-        this.setState({
+    onMouseUp(name){
+        /*this.setState({
             currentCharacter: name
         });
         this.moveCharacters();
+        */
     }
-    onmouseover(tierGridRow){
-        if(tierGridRow === 100000){
+    onMouseLeave(tierGridRow){
+        /*if(tierGridRow === 100000){
             this.setState({
                 currentTierGridRow: tierGridRow
             });
         }
+        */
     }
     render(){
         return(
             <div className = "mainGridWrapper">
                 <div className = "rightSideMenu">Right Side Menu</div>
                 <div className = "contentBody">
-                    <TierListChart characterList = {this.state.inTierListGrid} onmouseup = {(i) => this.onmouseup(i)} onmouseover = {(i) => this.onmouseover(i)}/>
-                    <CharacterSelectionGrid characterList = {this.state.inSelectionGrid} onmouseup = {(i) => this.onmouseup(i)}/>
+                    <TierListChart characterList = {this.state.inTierListGrid} onMouseUp = {(i) => this.onMouseUp(i)} onMouseLeave = {(i) => this.onMouseLeave(i)}/>
+                    <CharacterSelectionGrid characterList = {this.state.inSelectionGrid} onMouseUp = {(i) => this.onMouseUp(i)}/>
                 </div>
             </div>
         );

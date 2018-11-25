@@ -10,7 +10,7 @@ export default class CharacterSelectionGrid extends React.Component{
         let icons = this.characterList.map((name) => {
             return (
                 <div className = "characterIcon" key = {name}>
-                    <CharacterCard name ={name} onmouseup = {() => this.props.onmouseup(name)}/>
+                    <CharacterCard name ={name} onMouseUp = {() => this.props.onMouseUp(name)}/>
                 </div>
             );
         })
