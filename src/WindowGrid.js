@@ -11,36 +11,30 @@ export default class WindowGrid extends React.Component{
             "falco","fox","ness","iceclimbers","kirby","samus","sheik","link","younglink",
             "pichu","pikachu","jigglypuff","mewtwo","gnw","marth","roy"],
             inTierListGrid : [],
-            message: ""
         };
     };
 
-    moveCharacters(currentCharacter){
-        let inSelectionGrid = this.state.inSelectionGrid;
-        let inTierListGrid = this.state.inTierListGrid;
-        let message = this.state.message;
-        
-        let index = inSelectionGrid.indexOf(currentCharacter);
+    moveCharacters(currentCharacter){        
+        let newInSelectionGrid = this.state.inSelectionGrid;
+        let newInTierListGrid = this.state.inTierListGrid;
+
+        let index = newInSelectionGrid.indexOf(currentCharacter);
         if(index > -1){
-            inSelectionGrid.slice(index,1);
-            message = message + "1." + inSelectionGrid;
+            newInSelectionGrid = this.state.inSelectionGrid.filter( character => character !== currentCharacter);
         }
-        index = inTierListGrid[[currentCharacter, this.state.currentTierGridRow-1]];
+        index = newInTierListGrid[[currentCharacter, this.state.currentTierGridRow-1]];
         if(index > -1){
-            inTierListGrid.slice(index,1);
-            message = message + "2." + {inTierListGrid};
-            
+            newInTierListGrid = this.state.inTierListGrid.filter( pair => pair[0] !== currentCharacter);
         }
         if(this.state.currentTierGridRow === 0){
-            inSelectionGrid.push(currentCharacter);
+            newInSelectionGrid.push(currentCharacter);
         }
         else{
-            inTierListGrid.push([currentCharacter,this.state.currentTierGridRow-1]);
+            newInTierListGrid.push([currentCharacter,this.state.currentTierGridRow-1]);
         }
         this.setState({
-            inSelectionGrid: inSelectionGrid,
-            inTierListGrid: inTierListGrid,
-            message: message
+            inSelectionGrid: newInSelectionGrid,
+            inTierListGrid: newInTierListGrid,
         });
     }
     onMouseOver(tierGridRow){
@@ -55,7 +49,7 @@ export default class WindowGrid extends React.Component{
     render(){
         return(
             <div className = "mainGridWrapper">
-                <div className = "rightSideMenu">Right Side Menu char:{this.state.currentCharacter} row:{this.state.currentTierGridRow} message: {this.state.message}</div>
+                <div className = "rightSideMenu">Right Side Menu char:{this.state.currentCharacter} row:{this.state.currentTierGridRow}</div>
                 <div className = "contentBody">
                     <TierListChart 
                         characterList = {this.state.inTierListGrid} 

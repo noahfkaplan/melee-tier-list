@@ -11,10 +11,10 @@ export default class TierListChart extends React.Component{
         let charactersByRow = [[],[],[],[],[],[]];
         for(let i = 0; i < this.allCharacters.length; i++){
             charactersByRow[this.allCharacters[i][1]].push(
-                <div className = "characterIcon" key = {this.allCharacters[i][0] + {row:this.allCharacters[i][1]}}>
+                <div className = "characterIcon" key = {this.allCharacters[i][0] }>
                     <CharacterCard 
-                    name = {this.allCharacters[i][0]} 
-                    onClick = {() => this.props.onClick(this.allCharacters[i][0])} ></CharacterCard>
+                        name = {this.allCharacters[i][0]} 
+                        onClick = {() => this.props.onClick(this.allCharacters[i][0])}></CharacterCard>
                 </div>
             )
         }
