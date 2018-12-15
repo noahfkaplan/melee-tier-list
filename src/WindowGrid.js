@@ -18,14 +18,10 @@ export default class WindowGrid extends React.Component{
         let newInSelectionGrid = this.state.inSelectionGrid;
         let newInTierListGrid = this.state.inTierListGrid;
 
-        let index = newInSelectionGrid.indexOf(currentCharacter);
-        if(index > -1){
-            newInSelectionGrid = this.state.inSelectionGrid.filter( character => character !== currentCharacter);
-        }
-        index = newInTierListGrid[[currentCharacter, this.state.currentTierGridRow-1]];
-        if(index > -1){
-            newInTierListGrid = this.state.inTierListGrid.filter( pair => pair[0] !== currentCharacter);
-        }
+        newInSelectionGrid = this.state.inSelectionGrid.filter( character => character !== currentCharacter);
+
+        newInTierListGrid = this.state.inTierListGrid.filter( pair => pair[0] !== currentCharacter);
+        
         if(this.state.currentTierGridRow === 0){
             newInSelectionGrid.push(currentCharacter);
         }

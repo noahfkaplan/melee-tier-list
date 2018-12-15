@@ -6,7 +6,8 @@ export default class CharacterSelectionGrid extends React.Component{
         super(props);
         this.characterList = props.characterList;
     }
-    getCharacterIcons(){
+    getCharacterIcons(characterList){
+        this.characterList = characterList;
         let icons = this.characterList.map((name) => {
             return (
                 <div className = "characterIcon" key = {name}>
@@ -21,7 +22,7 @@ export default class CharacterSelectionGrid extends React.Component{
     render(){
         return(   
             <div className = "characterSelectionGrid" /*onMouseOver = {() => this.props.onMouseOver()}*/>
-                {this.getCharacterIcons()}
+                {this.getCharacterIcons(this.props.characterList)}
             </div>
         );    
     }

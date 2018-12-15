@@ -7,7 +7,8 @@ export default class TierListChart extends React.Component{
         super(props);
         this.allCharacters = this.props.characterList;
     }
-    addCharacters(){
+    addCharacters(characterList){
+        this.allCharacters = characterList;
         let charactersByRow = [[],[],[],[],[],[]];
         for(let i = 0; i < this.allCharacters.length; i++){
             charactersByRow[this.allCharacters[i][1]].push(
@@ -21,7 +22,7 @@ export default class TierListChart extends React.Component{
         return charactersByRow;
     }
     render(){
-        let charactersByRow = this.addCharacters();
+        let charactersByRow = this.addCharacters(this.props.characterList);
         return(
             <div className = "tierListTable">
                 <TierListRow onMouseOver = {() => this.props.onMouseOver(1)} icons = {charactersByRow[0]}/>
