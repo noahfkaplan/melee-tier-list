@@ -1,10 +1,9 @@
 import React from "react"
 
-export default function TierListRow(){
+export default function TierListRow(props){
     return(
-        <div className = "tierListRow">
-            {/*<input type = "text">Default</input>*/}
-            <div></div>
+        <div className = "tierListRow" onMouseOver = {() => props.onMouseOver()}>
+            {props.icons}
         </div>
     );
 }
