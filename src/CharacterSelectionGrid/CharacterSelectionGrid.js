@@ -13,7 +13,7 @@ export default class CharacterSelectionGrid extends React.Component{
                 <div className = "characterIcon" key = {name}>
                     <CharacterCard 
                         name ={name} 
-                        onClick = {() => this.props.onClick(name)}/>
+                        onDragStop = {() => this.props.onDragStop(name)}/>
                 </div>
             );
         })

@@ -38,7 +38,7 @@ export default class WindowGrid extends React.Component{
             currentTierGridRow: tierGridRow
         });
     }
-    handleClick(name){
+    handleStop(name){
         this.moveCharacters(name);
     }
 
@@ -50,10 +50,10 @@ export default class WindowGrid extends React.Component{
                     <TierListChart 
                         characterList = {this.state.inTierListGrid} 
                         onMouseOver = {(i) => this.onMouseOver(i)} 
-                        onClick = {(i) => this.handleClick(i)}/>
+                        onDragStop = {(i) => this.handleStop(i)}/>
                     <CharacterSelectionGrid 
                         characterList = {this.state.inSelectionGrid}
-                        onClick = {(i) => this.handleClick(i)}
+                        onDragStop = {(i) => this.handleStop(i)}
                         /*onMouseOver = {() => this.onMouseOver(0)}*//>
                 </div>
             </div>

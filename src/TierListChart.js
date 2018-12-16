@@ -15,7 +15,7 @@ export default class TierListChart extends React.Component{
                 <div className = "characterIcon" key = {this.allCharacters[i][0] }>
                     <CharacterCard 
                         name = {this.allCharacters[i][0]} 
-                        onClick = {() => this.props.onClick(this.allCharacters[i][0])}></CharacterCard>
+                        onDragStop = {() => this.props.onDragStop(this.allCharacters[i][0])}></CharacterCard>
                 </div>
             )
         }

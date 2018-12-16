@@ -19,8 +19,8 @@ export default class CharacterCard extends React.Component{
             position={null}
             onStart={this.handleStart}
             onDrag={this.handleDrag}
-            onStop={this.handleStop}>
-            <div className="handle"  onClick = {() => this.props.onClick()}>
+            onStop={this.props.onDragStop}>
+            <div className="handle">
                 <img  className = "characterImg" src={this.characterImg} alt={this.characterName} onDragStart = {this.preventDragHandler}/>
             </div>
             </Draggable>
