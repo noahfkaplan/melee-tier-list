@@ -1,5 +1,4 @@
 import React from 'react';
-import Draggable from 'react-draggable';
 
 export default class CharacterCard extends React.Component{
     constructor(props){
@@ -7,23 +6,15 @@ export default class CharacterCard extends React.Component{
         this.characterName = props.name;
         this.characterImg = require(`../characterIcons/${this.characterName}.png`);
     }
-    preventDragHandler = (e) => {
-        e.preventDefault();
-    }      
+    onDragStart = (ev, name) =>{
+        console.log('dragstart:', name);
+        ev.dataTransfer.setData("name", name);
+    }
     render() {
         return (
-            <Draggable
-            axis="both"
-            handle=".handle"
-            defaultPosition={{x: 0, y: 0}}
-            position={null}
-            onStart={this.handleStart}
-            onDrag={this.handleDrag}
-            onStop={this.handleStop}>
-            <div className="handle"  onClick = {() => this.props.onClick()}>
-                <img  className = "characterImg" src={this.characterImg} alt={this.characterName} onDragStart = {this.preventDragHandler}/>
+            <div className="draggable" draggable onDragStart={(e)=>this.onDragStart(e, this.characterName)}>
+                <img  className = "characterImg" src={this.characterImg} alt={this.characterName}/>
             </div>
-            </Draggable>
         );
     }
 }

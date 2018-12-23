@@ -1,5 +1,4 @@
 import React from "react"
-import TierListRow from "./TierListRow"
 import CharacterCard from "./CharacterCard/CharacterCard"
 
 export default class TierListChart extends React.Component{
@@ -12,25 +11,26 @@ export default class TierListChart extends React.Component{
         let charactersByRow = [[],[],[],[],[],[]];
         for(let i = 0; i < this.allCharacters.length; i++){
             charactersByRow[this.allCharacters[i][1]].push(
-                <div className = "characterIcon" key = {this.allCharacters[i][0] }>
-                    <CharacterCard 
-                        name = {this.allCharacters[i][0]} 
-                        onClick = {() => this.props.onClick(this.allCharacters[i][0])}></CharacterCard>
-                </div>
-            )
+                <CharacterCard 
+                    className = "characterIcon" 
+                    key = {this.allCharacters[i][0]}
+                    name = {this.allCharacters[i][0]}></CharacterCard>);
         }
         return charactersByRow;
+    }
+    onDragOver = (ev) =>{
+        ev.preventDefault();
     }
     render(){
         let charactersByRow = this.addCharacters(this.props.characterList);
         return(
             <div className = "tierListTable">
-                <TierListRow onMouseOver = {() => this.props.onMouseOver(1)} icons = {charactersByRow[0]}/>
-                <TierListRow onMouseOver = {() => this.props.onMouseOver(2)}  icons = {charactersByRow[1]}/>
-                <TierListRow onMouseOver = {() => this.props.onMouseOver(3)}  icons = {charactersByRow[2]}/>
-                <TierListRow onMouseOver = {() => this.props.onMouseOver(4)}  icons = {charactersByRow[3]}/>
-                <TierListRow onMouseOver = {() => this.props.onMouseOver(5)}  icons = {charactersByRow[4]}/>
-                <TierListRow onMouseOver = {() => this.props.onMouseOver(6)}  icons = {charactersByRow[5]}/>
+                <div className = "tierListRow" onDrop = {(e)=>this.props.onDrop(e,1)} onDragOver ={(e)=>this.onDragOver(e)}>{charactersByRow[0]}</div>
+                <div className = "tierListRow" onDrop = {(e)=>this.props.onDrop(e,2)} onDragOver ={(e)=>this.onDragOver(e)}>{charactersByRow[1]}</div>
+                <div className = "tierListRow" onDrop = {(e)=>this.props.onDrop(e,3)} onDragOver ={(e)=>this.onDragOver(e)}>{charactersByRow[2]}</div>     
+                <div className = "tierListRow" onDrop = {(e)=>this.props.onDrop(e,4)} onDragOver ={(e)=>this.onDragOver(e)}>{charactersByRow[3]}</div>
+                <div className = "tierListRow" onDrop = {(e)=>this.props.onDrop(e,5)} onDragOver ={(e)=>this.onDragOver(e)}>{charactersByRow[4]}</div>
+                <div className = "tierListRow" onDrop = {(e)=>this.props.onDrop(e,6)} onDragOver ={(e)=>this.onDragOver(e)}>{charactersByRow[5]}</div>
             </div>
         );
     }
