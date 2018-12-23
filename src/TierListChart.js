@@ -5,10 +5,14 @@ export default class TierListChart extends React.Component{
     constructor(props){
         super(props);
         this.allCharacters = this.props.characterList;
+        this.rowCount = 6;
     }
     addCharacters(characterList){
         this.allCharacters = characterList;
-        let charactersByRow = [[],[],[],[],[],[]];
+        let charactersByRow = [];
+        for(let i = 0; i < this.rowCount; i++){
+            charactersByRow.push([]);
+        }
         for(let i = 0; i < this.allCharacters.length; i++){
             charactersByRow[this.allCharacters[i][1]].push(
                 <CharacterCard 
@@ -21,16 +25,19 @@ export default class TierListChart extends React.Component{
     onDragOver = (ev) =>{
         ev.preventDefault();
     }
+    createRows(charactersByRow){
+        let rows = [];
+        for(let i = 0; i < this.rowCount; i++){
+            rows.push(<div key = {i} className = "tierListRow" onDrop = {(e)=>this.props.onDrop(e,i+1)} onDragOver ={(e)=>this.onDragOver(e)}>{charactersByRow[i]}</div>)
+        }
+        return rows;
+    }
     render(){
         let charactersByRow = this.addCharacters(this.props.characterList);
+        let rows = this.createRows(charactersByRow);
         return(
             <div className = "tierListTable">
-                <div className = "tierListRow" onDrop = {(e)=>this.props.onDrop(e,1)} onDragOver ={(e)=>this.onDragOver(e)}>{charactersByRow[0]}</div>
-                <div className = "tierListRow" onDrop = {(e)=>this.props.onDrop(e,2)} onDragOver ={(e)=>this.onDragOver(e)}>{charactersByRow[1]}</div>
-                <div className = "tierListRow" onDrop = {(e)=>this.props.onDrop(e,3)} onDragOver ={(e)=>this.onDragOver(e)}>{charactersByRow[2]}</div>     
-                <div className = "tierListRow" onDrop = {(e)=>this.props.onDrop(e,4)} onDragOver ={(e)=>this.onDragOver(e)}>{charactersByRow[3]}</div>
-                <div className = "tierListRow" onDrop = {(e)=>this.props.onDrop(e,5)} onDragOver ={(e)=>this.onDragOver(e)}>{charactersByRow[4]}</div>
-                <div className = "tierListRow" onDrop = {(e)=>this.props.onDrop(e,6)} onDragOver ={(e)=>this.onDragOver(e)}>{charactersByRow[5]}</div>
+                {rows}
             </div>
         );
     }
