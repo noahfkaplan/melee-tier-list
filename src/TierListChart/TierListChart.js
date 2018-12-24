@@ -1,5 +1,5 @@
 import React from "react"
-import CharacterCard from "./CharacterCard/CharacterCard"
+import CharacterCard from "../CharacterCard/CharacterCard"
 
 export default class TierListChart extends React.Component{
     constructor(props){

@@ -1,6 +1,6 @@
 import React from "react"
-import CharacterSelectionGrid from "./CharacterSelectionGrid/CharacterSelectionGrid"
-import TierListChart from "./TierListChart"
+import CharacterSelectionGrid from "../CharacterSelectionGrid/CharacterSelectionGrid"
+import TierListChart from "../TierListChart/TierListChart"
 
 export default class WindowGrid extends React.Component{
     constructor(props){
