@@ -11,7 +11,11 @@ export default class CharacterCard extends React.Component{
     }
     render() {
         return (
-            <div className="draggable" draggable onDragStart={(e)=>this.onDragStart(e, this.characterName)}>
+            <div className="draggable" 
+                draggable 
+                onDragStart={(e)=>this.onDragStart(e, this.characterName)}
+                onMouseOver = {(character) => this.props.onMouseOver(this.characterName)}
+                onMouseOut = {()=>this.props.onMouseOut()}>
                 <img  className = "characterImg" src={this.characterImg} alt={this.characterName}/>
             </div>
         );

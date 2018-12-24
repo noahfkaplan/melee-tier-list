@@ -10,9 +10,9 @@ export default class WindowGrid extends React.Component{
             "falco","fox","ness","iceclimbers","kirby","samus","sheik","link","younglink",
             "pichu","pikachu","jigglypuff","mewtwo","gnw","marth","roy"],
             inTierListGrid : [],
+            hoveredCharacter: null,
         };
     };
-
     moveCharacters(currentCharacter,currentRow){        
         let newInSelectionGrid = this.state.inSelectionGrid;
         let newInTierListGrid = this.state.inTierListGrid;
@@ -35,7 +35,18 @@ export default class WindowGrid extends React.Component{
         let name = ev.dataTransfer.getData("name");
         this.moveCharacters(name,row);
     }
-
+    onMouseOver(hoveredCharacter){
+        console.log('mouse over', hoveredCharacter);
+        this.setState({
+            hoveredCharacter: hoveredCharacter,
+        });
+    }
+    onMouseOut(){
+        console.log('mouse leave', this.state.hoveredCharacter);
+        this.setState({
+            hoveredCharacter: null,
+        });
+    }
     render(){
         return(
             <div className = "mainGridWrapper">
@@ -43,10 +54,14 @@ export default class WindowGrid extends React.Component{
                 <div className = "contentBody">
                     <TierListChart 
                         characterList = {this.state.inTierListGrid} 
-                        onDrop = {(ev,row) => this.onDrop(ev,row)}/>
+                        onDrop = {(ev,row) => this.onDrop(ev,row)}
+                        onMouseOver = {(character) => this.onMouseOver(character)}
+                        onMouseOut = {() => this.onMouseOut()}/>
                     <CharacterSelectionGrid 
                         characterList = {this.state.inSelectionGrid}
-                        onDrop = {(ev,row) => this.onDrop(ev,row)}/>
+                        onDrop = {(ev,row) => this.onDrop(ev,row)}
+                        onMouseOver = {(character) => this.onMouseOver(character)}
+                        onMouseOut = {() => this.onMouseOut()}/>
                 </div>
             </div>
         );

@@ -10,16 +10,18 @@ export default class CharacterSelectionGrid extends React.Component{
         this.characterList = characterList;
         let icons = this.characterList.map((name) => {
             return (
-                <div className = "characterIcon" key = {name}>
-                    <CharacterCard 
-                        name ={name}/>
-                </div>
+                <CharacterCard 
+                    className = "characterIcon"
+                    onMouseOver = {(character) => this.props.onMouseOver(character)}
+                    onMouseOut = {() => this.props.onMouseOut()}
+                    key = {name}
+                    name ={name}/>
             );
         })
         return icons;
     }
     onDragOver = (ev) =>{
-        ev.preventDefault();
+        //ev.preventDefault();
     }
     render(){
         return(   

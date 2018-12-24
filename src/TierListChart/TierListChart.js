@@ -17,6 +17,8 @@ export default class TierListChart extends React.Component{
             charactersByRow[this.allCharacters[i][1]].push(
                 <CharacterCard 
                     className = "characterIcon" 
+                    onMouseOver = {(character) => this.props.onMouseOver(character)}
+                    onMouseOut = {() => this.props.onMouseOut()}
                     key = {this.allCharacters[i][0]}
                     name = {this.allCharacters[i][0]}></CharacterCard>);
         }
