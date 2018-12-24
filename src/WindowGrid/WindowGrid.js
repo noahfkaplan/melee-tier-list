@@ -1,6 +1,6 @@
 import React from "react"
-import CharacterSelectionGrid from "./CharacterSelectionGrid/CharacterSelectionGrid"
-import TierListChart from "./TierListChart"
+import CharacterSelectionGrid from "../CharacterSelectionGrid/CharacterSelectionGrid"
+import TierListChart from "../TierListChart/TierListChart"
 
 export default class WindowGrid extends React.Component{
     constructor(props){
@@ -18,7 +18,6 @@ export default class WindowGrid extends React.Component{
         let newInTierListGrid = this.state.inTierListGrid;
 
         newInSelectionGrid = this.state.inSelectionGrid.filter( character => character !== currentCharacter);
-
         newInTierListGrid = this.state.inTierListGrid.filter( pair => pair[0] !== currentCharacter);
         
         if(currentRow === 7){
@@ -33,9 +32,7 @@ export default class WindowGrid extends React.Component{
         });
     }
     onDrop(ev, row){
-        this.render();
         let name = ev.dataTransfer.getData("name");
-        console.log('Dropped Row:', row);
         this.moveCharacters(name,row);
     }
 
@@ -49,8 +46,7 @@ export default class WindowGrid extends React.Component{
                         onDrop = {(ev,row) => this.onDrop(ev,row)}/>
                     <CharacterSelectionGrid 
                         characterList = {this.state.inSelectionGrid}
-                        onDrop = {(ev,row) => this.onDrop(ev,row)}
-                        /*onMouseOver = {() => this.onMouseOver(0)}*//>
+                        onDrop = {(ev,row) => this.onDrop(ev,row)}/>
                 </div>
             </div>
         );

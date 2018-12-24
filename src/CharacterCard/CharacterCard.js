@@ -7,7 +7,6 @@ export default class CharacterCard extends React.Component{
         this.characterImg = require(`../characterIcons/${this.characterName}.png`);
     }
     onDragStart = (ev, name) =>{
-        console.log('dragstart:', name);
         ev.dataTransfer.setData("name", name);
     }
     render() {

@@ -54,7 +54,3 @@ code {
   height: 80px;
   border: 1px solid black;
 }
-.tierListTable{
-  display:grid;
-  grid-template-rows: repeat(6, 1fr);
-}
