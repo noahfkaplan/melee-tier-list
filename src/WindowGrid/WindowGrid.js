@@ -11,6 +11,7 @@ export default class WindowGrid extends React.Component{
             "pichu","pikachu","jigglypuff","mewtwo","gnw","marth","roy"],
             inTierListGrid : [],
             hoveredCharacter: null,
+            stillHoveredOverCharacter: false,
         };
     };
     moveCharacters(currentCharacter,currentRow){        
@@ -64,16 +65,23 @@ export default class WindowGrid extends React.Component{
     onDragEnterIcon(ev, hoveredCharacter){//onDragEnter?
         ev.preventDefault();
         console.log('drag over', hoveredCharacter);
+        let stillHoveredOverCharacter = false;
+        if(this.state.hoveredCharacter !== null){
+            stillHoveredOverCharacter = true;
+        }
         this.setState({
             hoveredCharacter: hoveredCharacter,
+            stillHoveredOverCharacter: stillHoveredOverCharacter,
         })
     }
     onDragLeaveIcon(ev){//onDragLeave?
         ev.preventDefault();
-        console.log('not over character anymore');
-        this.setState({
-            hoveredCharacter: null,
-        })
+        if(!this.state.stillHoveredOverCharacter){
+            console.log('not over character anymore');
+            this.setState({
+                hoveredCharacter: null,
+            })
+        }
     }
     render(){
         return(
