@@ -12,8 +12,10 @@ export default class CharacterSelectionGrid extends React.Component{
             return (
                 <CharacterCard 
                     className = "characterIcon"
-                    onMouseOver = {(character) => this.props.onMouseOver(character)}
-                    onMouseOut = {() => this.props.onMouseOut()}
+                    /*onMouseEnter = {(character) => this.props.onMouseEnter(character)}
+                    onMouseLeave = {() => this.props.onMouseLeave()}*/
+                    onDragEnter = {(e,character) => this.props.onDragEnter(e,character)}
+                    onDragLeave ={(e)=>this.props.onDragLeave(e)}
                     key = {name}
                     name ={name}/>
             );
@@ -21,11 +23,11 @@ export default class CharacterSelectionGrid extends React.Component{
         return icons;
     }
     onDragOver = (ev) =>{
-        //ev.preventDefault();
+        ev.preventDefault();
     }
     render(){
         return(   
-            <div className = "droppable" onDrop = {(e)=>this.props.onDrop(e,7)} onDragOver ={(e)=>this.onDragOver(e)}>
+            <div className = "droppable" onDrop = {(e)=>this.props.onDrop(e,7)} onDragOver = {(e)=>this.onDragOver(e)}>
                 <div className = "characterSelectionGrid" >
                     {this.getCharacterIcons(this.props.characterList)}
                 </div>
