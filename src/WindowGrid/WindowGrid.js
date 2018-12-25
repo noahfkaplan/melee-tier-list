@@ -49,39 +49,19 @@ export default class WindowGrid extends React.Component{
         let name = ev.dataTransfer.getData("name");
         this.moveCharacters(name,row);
     }
-    /*
-    onMouseEnter(hoveredCharacter){
-        console.log('mouse over', hoveredCharacter);
-        this.setState({
-            hoveredCharacter: hoveredCharacter,
-        });
-    }
-    onMouseLeave(){
-        console.log('mouse leave', this.state.hoveredCharacter);
-        this.setState({
-            hoveredCharacter: null,
-        });
-    }*/
-    onDragEnterIcon(ev, hoveredCharacter){//onDragEnter?
+    onDragOverIcon(ev, hoveredCharacter){//onDragOver?
         ev.preventDefault();
         console.log('drag over', hoveredCharacter);
-        let stillHoveredOverCharacter = false;
-        if(this.state.hoveredCharacter !== null){
-            stillHoveredOverCharacter = true;
-        }
         this.setState({
             hoveredCharacter: hoveredCharacter,
-            stillHoveredOverCharacter: stillHoveredOverCharacter,
         })
     }
     onDragLeaveIcon(ev){//onDragLeave?
         ev.preventDefault();
-        if(!this.state.stillHoveredOverCharacter){
-            console.log('not over character anymore');
-            this.setState({
-                hoveredCharacter: null,
-            })
-        }
+        console.log('not over character anymore');
+        this.setState({
+            hoveredCharacter: null,
+        })
     }
     render(){
         return(
@@ -93,14 +73,14 @@ export default class WindowGrid extends React.Component{
                         onDrop = {(ev,row) => this.onDrop(ev,row)}
                         /*onMouseEnter = {(character) => this.onMouseEnter(character)}
                         onMouseLeave = {() => this.onMouseLeave()}*/
-                        onDragEnter = {(e,character) =>this.onDragEnterIcon(e,character)}
+                        onDragOver = {(e,character) =>this.onDragOverIcon(e,character)}
                         onDragLeave = {(e)=>this.onDragLeaveIcon(e)}/>
                     <CharacterSelectionGrid 
                         characterList = {this.state.inSelectionGrid}
                         onDrop = {(ev,row) => this.onDrop(ev,row)}
                         /*onMouseEnter = {(character) => this.onMouseEnter(character)}
                         onMouseLeave = {() => this.onMouseLeave()}*/
-                        onDragEnter = {(e,character) =>this.onDragEnterIcon(e,character)}
+                        onDragOver = {(e,character) =>this.onDragOverIcon(e,character)}
                         onDragLeave = {(e)=>this.onDragLeaveIcon(e)}/>
                 </div>
             </div>
