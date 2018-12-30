@@ -17,8 +17,6 @@ export default class TierListChart extends React.Component{
             charactersByRow[this.allCharacters[i][1]].push(
                 <CharacterCard 
                     className = "characterIcon" 
-                    /*onMouseEnter = {(character) => this.props.onMouseEnter(character)}
-                    onMouseLeave = {() => this.props.onMouseLeave()}*/
                     onDragOver = {(e,character)=>this.props.onDragOver(e,character)}
                     onDragLeave ={(e)=>this.props.onDragLeave(e)}
                     key = {this.allCharacters[i][0]}
@@ -32,7 +30,7 @@ export default class TierListChart extends React.Component{
     createRows(charactersByRow){
         let rows = [];
         for(let i = 0; i < this.rowCount; i++){
-            rows.push(<div key = {i} className = "tierListRow" onDrop = {(e)=>this.props.onDrop(e,i+1)} onDragOver = {(e)=>this.onDragOver(e)}>{charactersByRow[i]}</div>)
+            rows.push(<div key = {i} className = "tierListRow" placeholder = {"row"+i} onDrop = {(e)=>this.props.onDrop(e,i+1)} onDragOver = {(e)=>this.onDragOver(e)}>{charactersByRow[i]}</div>)
         }
         return rows;
     }

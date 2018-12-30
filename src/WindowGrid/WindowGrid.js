@@ -49,14 +49,14 @@ export default class WindowGrid extends React.Component{
         let name = ev.dataTransfer.getData("name");
         this.moveCharacters(name,row);
     }
-    onDragOverIcon(ev, hoveredCharacter){//onDragOver?
+    onDragOverIcon(ev, hoveredCharacter){
         ev.preventDefault();
         console.log('drag over', hoveredCharacter);
         this.setState({
             hoveredCharacter: hoveredCharacter,
         })
     }
-    onDragLeaveIcon(ev){//onDragLeave?
+    onDragLeaveIcon(ev){
         ev.preventDefault();
         console.log('not over character anymore');
         this.setState({
@@ -71,15 +71,11 @@ export default class WindowGrid extends React.Component{
                     <TierListChart 
                         characterList = {this.state.inTierListGrid} 
                         onDrop = {(ev,row) => this.onDrop(ev,row)}
-                        /*onMouseEnter = {(character) => this.onMouseEnter(character)}
-                        onMouseLeave = {() => this.onMouseLeave()}*/
                         onDragOver = {(e,character) =>this.onDragOverIcon(e,character)}
                         onDragLeave = {(e)=>this.onDragLeaveIcon(e)}/>
                     <CharacterSelectionGrid 
                         characterList = {this.state.inSelectionGrid}
                         onDrop = {(ev,row) => this.onDrop(ev,row)}
-                        /*onMouseEnter = {(character) => this.onMouseEnter(character)}
-                        onMouseLeave = {() => this.onMouseLeave()}*/
                         onDragOver = {(e,character) =>this.onDragOverIcon(e,character)}
                         onDragLeave = {(e)=>this.onDragLeaveIcon(e)}/>
                 </div>
