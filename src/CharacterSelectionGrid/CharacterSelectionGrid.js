@@ -10,10 +10,12 @@ export default class CharacterSelectionGrid extends React.Component{
         this.characterList = characterList;
         let icons = this.characterList.map((name) => {
             return (
-                <div className = "characterIcon" key = {name}>
-                    <CharacterCard 
-                        name ={name}/>
-                </div>
+                <CharacterCard 
+                    className = "characterIcon"
+                    onDragOver = {(e,character) => this.props.onDragOver(e,character)}
+                    onDragLeave ={(e)=>this.props.onDragLeave(e)}
+                    key = {name}
+                    name ={name}/>
             );
         })
         return icons;
@@ -23,7 +25,7 @@ export default class CharacterSelectionGrid extends React.Component{
     }
     render(){
         return(   
-            <div className = "droppable" onDrop = {(e)=>this.props.onDrop(e,7)} onDragOver ={(e)=>this.onDragOver(e)}>
+            <div className = "droppable" onDrop = {(e)=>this.props.onDrop(e,7)} onDragOver = {(e)=>this.onDragOver(e)}>
                 <div className = "characterSelectionGrid" >
                     {this.getCharacterIcons(this.props.characterList)}
                 </div>
