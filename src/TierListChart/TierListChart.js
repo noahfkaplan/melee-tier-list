@@ -1,5 +1,6 @@
 import React from "react"
 import CharacterCard from "../CharacterCard/CharacterCard"
+import TierListRow from "../TierListRow/TierListRow"
 
 export default class TierListChart extends React.Component{
     constructor(props){
@@ -24,13 +25,10 @@ export default class TierListChart extends React.Component{
         }
         return charactersByRow;
     }
-    onDragOver = (ev) =>{
-        ev.preventDefault();
-    }
     createRows(charactersByRow){
         let rows = [];
         for(let i = 0; i < this.rowCount; i++){
-            rows.push(<div key = {i} className = "tierListRow" placeholder = {"row"+i} onDrop = {(e)=>this.props.onDrop(e,i+1)} onDragOver = {(e)=>this.onDragOver(e)}>{charactersByRow[i]}</div>)
+            rows.push(<TierListRow key = {i} onDrop = {(e)=>this.props.onDrop(e,i+1)} characters = {charactersByRow[i]}/>);
         }
         return rows;
     }
