@@ -1,4 +1,5 @@
 import React from "react"
+import RowLabel from "../RowLabel/RowLabel"
 
 export default class TierListRow extends React.Component{
     constructor(props){
@@ -31,7 +32,10 @@ export default class TierListRow extends React.Component{
                 data-testid = {this.state.isHighlighted?"highlighted":"not-highlighted"} 
                 onDrop = {(e)=>this.onDrop(e)} 
                 onDragOver = {(e)=>this.onDragOver(e)}
-                onDragLeave = {()=>this.onDragLeave()}>{this.props.characters}</div>
+                onDragLeave = {()=>this.onDragLeave()}>
+                <RowLabel placeholder = {this.props.placeholder}/>
+                {this.props.characters}
+            </div>
         );
     }
 }

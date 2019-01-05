@@ -7,6 +7,7 @@ export default class TierListChart extends React.Component{
         super(props);
         this.allCharacters = this.props.characterList;
         this.rowCount = 6;
+        this.defaultPlaceHolderText = ['S','A','B','C','D','F'];
     }
     addCharacters(characterList){
         this.allCharacters = characterList;
@@ -21,14 +22,20 @@ export default class TierListChart extends React.Component{
                     onDragOver = {(e,character)=>this.props.onDragOver(e,character)}
                     onDragLeave ={(e)=>this.props.onDragLeave(e)}
                     key = {this.allCharacters[i][0]}
-                    name = {this.allCharacters[i][0]}></CharacterCard>);
+                    name = {this.allCharacters[i][0]}>
+                </CharacterCard>);
         }
         return charactersByRow;
     }
     createRows(charactersByRow){
         let rows = [];
         for(let i = 0; i < this.rowCount; i++){
-            rows.push(<TierListRow key = {i} onDrop = {(e)=>this.props.onDrop(e,i+1)} characters = {charactersByRow[i]}/>);
+            rows.push(
+                <TierListRow key = {i} 
+                    onDrop = {(e)=>this.props.onDrop(e,i+1)} 
+                    characters = {charactersByRow[i]} 
+                    placeholder = {this.defaultPlaceHolderText[i]}/>
+            );
         }
         return rows;
     }
