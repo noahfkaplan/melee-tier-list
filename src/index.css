@@ -76,3 +76,14 @@ code {
   background-color:rgb(226, 238, 238);
   outline: none;
 }
+.contextMenu{
+  display:flex;
+  flex-direction:column;
+  background-color: rgb(226, 238, 238);
+  height: 100%;
+  width: 150px;
+}
+.contextMenuOption{
+  outline: none;
+  background-color: rgb(226, 238, 238); 
+}
