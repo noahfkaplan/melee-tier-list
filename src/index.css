@@ -65,16 +65,31 @@ code {
   background-color:rgb(47, 51, 51);
   border: 1px solid black;
 }
-.rowLabel{
-  height: 76px;
+.rowLabelWrapper{
+  display: flex;
+  flex-direction: column;
+  height: 82px;
   width: 100px;
+  background-color:rgb(226, 238, 238);
+}
+.expandButton{
+  width:25px;
+  height:25px;
+  margin-left: auto;
+  background-color: transparent;
+  border-style: none;
+}
+.rowLabelText{
   overflow: hidden;
   resize: none;
   text-align: center;
   font-weight: bold;
   font-size: 18;
-  background-color:rgb(226, 238, 238);
   outline: none;
+  background-color: transparent;
+  border: none;
+  padding: 0px,2px,2px,2px;
+  flex: 1;
 }
 .contextMenu{
   display:flex;
