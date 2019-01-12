@@ -5,19 +5,23 @@ export default class ContextMenu extends React.Component{
         super(props);
         this.menuOptions = props.menuOptions;
         this.menuOptionButtons = [];
+        this.topEdge = this.props.topEdge;
+        this.leftEdge = this.props.LeftEdge;
+        this.isVisible = this.props.isVisible;
     }
 
     addMenuOptions(){
         this.menuOptionButtons = this.menuOptions.map((option) => 
             <div key = {option}>
                 <button className = "contextMenuOption">{option}</button>
-            </div>); 
+            </div>
+        ); 
     }
 
     render(){
         this.addMenuOptions();
         return(
-            <div className = "contextMenu">
+            <div className = "ContextMenu">
                 {this.menuOptionButtons}
             </div>
         );

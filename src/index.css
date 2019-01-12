@@ -1,17 +1,3 @@
-body {
-  margin: 0;
-  padding: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
-}
 .characterImg{
   height: 78px;
   width:78px;
@@ -65,6 +51,10 @@ code {
   background-color:rgb(47, 51, 51);
   border: 1px solid black;
 }
+.rowLabelWithContextMenu{
+  display:flex;
+  flex-direction:row;
+}
 .rowLabelWrapper{
   display: flex;
   flex-direction: column;
@@ -75,6 +65,8 @@ code {
 .expandButton{
   width:25px;
   height:25px;
+  font-weight: bold;
+  font-size: 18;
   margin-left: auto;
   background-color: transparent;
   border-style: none;
@@ -92,13 +84,10 @@ code {
   flex: 1;
 }
 .contextMenu{
+  background-color:rgb(226, 238, 238);
   display:flex;
-  flex-direction:column;
-  background-color: rgb(226, 238, 238);
-  height: 100%;
-  width: 150px;
+  flex-direction: column;
 }
 .contextMenuOption{
   outline: none;
-  background-color: rgb(226, 238, 238); 
 }
