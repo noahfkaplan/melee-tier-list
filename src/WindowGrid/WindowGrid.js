@@ -14,6 +14,22 @@ export default class WindowGrid extends React.Component{
             stillHoveredOverCharacter: false,
         };
     };
+    deleteRow(rowNumber){
+        let newInSelectionGrid = this.state.inSelectionGrid;
+        let newInTierListGrid = this.state.inTierListGrid;
+        //return icons from reset row to the selection grid
+        let returnedIcons = newInTierListGrid.filter((pair) => pair[1] === rowNumber);
+        returnedIcons = returnedIcons.map((pair) => pair[0]);
+        newInSelectionGrid.push(...returnedIcons);
+        //filter out items from tierlistgrid that are in the reset row
+        newInTierListGrid = newInTierListGrid.filter((pair) => pair[1] !== rowNumber);
+        //decrement all row numbers larger than the deleted row
+        newInTierListGrid = newInTierListGrid.map((pair) => pair[1]>rowNumber?[pair[0],pair[1]-1]:[pair[0],pair[1]]);
+        this.setState({
+            inTierListGrid : newInTierListGrid,
+            newInSelectionGrid : newInSelectionGrid,
+        });
+    }
     resetRow(rowNumber){
         let newInSelectionGrid = this.state.inSelectionGrid;
         let newInTierListGrid = this.state.inTierListGrid;
@@ -26,7 +42,7 @@ export default class WindowGrid extends React.Component{
         this.setState({
             inTierListGrid : newInTierListGrid,
             newInSelectionGrid : newInSelectionGrid,
-        })
+        });
     }
     moveCharacters(currentCharacter,currentRow){        
         if(currentCharacter !== this.state.hoveredCharacter){
@@ -88,7 +104,8 @@ export default class WindowGrid extends React.Component{
                         onDrop = {(ev,row) => this.onDrop(ev,row)}
                         onDragOver = {(e,character) =>this.onDragOverIcon(e,character)}
                         onDragLeave = {(e)=>this.onDragLeaveIcon(e)}
-                        resetRow = {(row)=>this.resetRow(row)}/>
+                        resetRow = {(row)=>this.resetRow(row)}
+                        deleteRow = {(row)=>this.deleteRow(row)}/>
                     <CharacterSelectionGrid 
                         characterList = {this.state.inSelectionGrid}
                         onDrop = {(ev,row) => this.onDrop(ev,row)}

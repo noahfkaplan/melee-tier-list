@@ -51,7 +51,11 @@ export default class TierListChart extends React.Component{
         console.log(row);
     }
     deleteRow(row){
-        console.log(row);
+        this.props.deleteRow(row);
+        this.defaultPlaceHolderText.splice(row,1);
+        this.setState({
+            rowCount: this.state.rowCount-1,
+        })
     }
     renderContextMenu = () => {
         let menu = null;
