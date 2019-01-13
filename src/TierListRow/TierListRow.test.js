@@ -1,16 +1,31 @@
 import React from "react"
 import TierListRow from "./TierListRow"
-import { render } from "react-testing-library";
+import { render, fireEvent } from "react-testing-library";
 
-describe("Tier List Row" , function(){
-    it("renders without crashing", function(){
+const setup = () => {
     let element = [<div key = "placeholder">placeholder</div>];
-        render(<TierListRow characters = {element}/>);
-    });
-    it("renders the correct icons", function(){
-        let elements = [<div key = "placeholder">placeholder</div>];
-        const {getByText} = render(<TierListRow characters = {elements}></TierListRow>);
-        const placeholderElement = getByText("placeholder");
-        expect(placeholderElement).toBeDefined();
-    });
+    const {getByText, getByTestId} = render(<TierListRow characters = {element}/>);
+    return {getByText, getByTestId};
+}
+
+test("It should render the correct icons", ()=>{
+    const {getByText} = setup();
+    const placeholderElement = getByText("placeholder");
+    expect(placeholderElement).toBeDefined();
+});
+test("It should highlight on dragOver", ()=>{
+    const {getByTestId} = setup();
+    let row = getByTestId("not-highlighted");
+    fireEvent.dragOver(row)
+    row = getByTestId("highlighted");
+    expect(row).toBeDefined();
+});
+test("It should stop highlighting on dragLeave", ()=>{
+    const {getByTestId} = setup();
+    let row = getByTestId("not-highlighted");
+    fireEvent.dragOver(row)
+    row = getByTestId("highlighted");
+    fireEvent.dragLeave(row);
+    row = getByTestId("not-highlighted");
+    expect(row).toBeDefined();
 });
