@@ -51,10 +51,6 @@
   background-color:rgb(47, 51, 51);
   border: 1px solid black;
 }
-.rowLabelWithContextMenu{
-  display:flex;
-  flex-direction:row;
-}
 .rowLabelWrapper{
   display: flex;
   flex-direction: column;

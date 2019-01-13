@@ -1,12 +1,17 @@
 import React from "react"
 
-export default class RowLabel extends React.Component{
-    render(){
-        return(
-            <div className = "rowLabelWrapper">
-                <button className = "expandButton" onClick ={(event)=>this.props.onClick(event)}>...</button>
-                <textarea className = "rowLabelText" spellCheck = "false" placeholder = {this.props.placeholder}></textarea>
-            </div>
-        );
-    }
+export default function RowLabel(props){
+    return(
+        <div className = "rowLabelWrapper">
+            <button className = "expandButton" onClick ={(event)=>props.onClick(event)}>...</button>
+            <textarea 
+                className = "rowLabelText" 
+                spellCheck = "false" 
+                placeholder = {props.placeholder} 
+                value = {props.text} 
+                onChange = {(event)=>props.onChange(event.target.value)}>
+            </textarea>
+        </div>
+    );
+
 }

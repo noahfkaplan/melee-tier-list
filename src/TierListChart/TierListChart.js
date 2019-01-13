@@ -9,6 +9,7 @@ export default class TierListChart extends React.Component{
         this.allCharacters = this.props.characterList;
         this.defaultPlaceHolderText = ['S','A','B','C','D','F'];
         this.state = {
+            labelTexts: ["","","","","",""],
             menuExpanded:false,
             menu_X:0,
             menu_Y:0,
@@ -33,7 +34,13 @@ export default class TierListChart extends React.Component{
         }
         return charactersByRow;
     }
-
+    onTextChange(text, row){
+        let newText = this.state.labelTexts;
+        newText[row] = text;
+        this.setState({
+            labelTexts: newText,
+        });      
+    }
     createRows(charactersByRow){
         let rows = [];
         for(let i = 0; i < this.state.rowCount; i++){
@@ -42,7 +49,9 @@ export default class TierListChart extends React.Component{
                     onDrop = {(e)=>this.props.onDrop(e,i+1)} 
                     characters = {charactersByRow[i]} 
                     placeholder = {this.defaultPlaceHolderText[i]}
-                    onClick = {(event,rowCount)=>this.onClick(event,i)}/>
+                    onChange = {(text,row) => this.onTextChange(text,i)}
+                    text = {this.state.labelTexts[i]}
+                    onClick = {(event,row)=>this.onClick(event,i)}/>
             );
         }
         return rows;
@@ -53,8 +62,12 @@ export default class TierListChart extends React.Component{
     deleteRow(row){
         this.props.deleteRow(row);
         this.defaultPlaceHolderText.splice(row,1);
+        let newLabelTexts = this.state.labelTexts;
+        newLabelTexts.splice(row,1);
+
         this.setState({
             rowCount: this.state.rowCount-1,
+            labelTexts: newLabelTexts,
         })
     }
     renderContextMenu = () => {
