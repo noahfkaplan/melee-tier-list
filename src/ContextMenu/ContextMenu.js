@@ -6,7 +6,7 @@ export default class ContextMenu extends React.Component{
         this.menuOptions = props.menuOptions;
         this.menuOptionButtons = [];
         this.topEdge = this.props.topEdge;
-        this.leftEdge = this.props.LeftEdge;
+        this.leftEdge = this.props.leftEdge;
         this.isVisible = this.props.isVisible;
     }
 
@@ -21,7 +21,7 @@ export default class ContextMenu extends React.Component{
     render(){
         this.addMenuOptions();
         return(
-            <div className = "contextMenu">
+            <div className = "contextMenu"style={{left: this.leftEdge, top: this.topEdge, position:'absolute'}}>
                 {this.menuOptionButtons}
             </div>
         );

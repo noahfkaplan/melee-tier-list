@@ -49,28 +49,25 @@ export default class TierListChart extends React.Component{
     renderContextMenu = () => {
         let menu = null;
         if(this.state.menuExpanded){
-            menu = <ContextMenu topEdge = {this.state.menu_Y} leftEdge = {this.state.menu_Y} menuOptions = {["option1","option2"]}></ContextMenu>
+            menu = <ContextMenu topEdge = {this.state.menu_Y} leftEdge = {this.state.menu_X} menuOptions = {["option1","option2"]}></ContextMenu>
         }
         return menu;
     }
     onClick = (event) =>{
         let nextMenuExpandedState = !this.state.menuExpanded;
+        let rect = document.getElementById("TierListTable").getBoundingClientRect();
         this.setState({
             menuExpanded : nextMenuExpandedState,
-            menu_X: event.clientX,
-            menu_Y: event.clientY,
+            menu_X: event.clientX - rect.left,
+            menu_Y: event.clientY - rect.top,
         });
-        console.log(event.clientX);
-        console.log(event.clientY);
     }
     render(){
         let charactersByRow = this.addCharacters(this.props.characterList);
         let rows = this.createRows(charactersByRow);
         return(
-            <div className = "tierListTable" id = "TierListTable">
-                <div onClick = {()=> this.state.menuExpanded?this.setState({menuExpanded:false}):0}>
-                    {rows}
-                </div>
+            <div className = "tierListTable" id = "TierListTable" onClick = {()=> this.state.menuExpanded?this.setState({menuExpanded:false}):0}>
+                {rows}
                 {this.renderContextMenu()}
             </div>
         );
