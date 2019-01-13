@@ -7,18 +7,18 @@ export default class TierListChart extends React.Component{
     constructor(props){
         super(props);
         this.allCharacters = this.props.characterList;
-        this.rowCount = 6;
         this.defaultPlaceHolderText = ['S','A','B','C','D','F'];
         this.state = {
             menuExpanded:false,
             menu_X:0,
             menu_Y:0,
+            rowCount: 6,
         }
     }
     addCharacters(characterList){
         this.allCharacters = characterList;
         let charactersByRow = [];
-        for(let i = 0; i < this.rowCount; i++){
+        for(let i = 0; i < this.state.rowCount; i++){
             charactersByRow.push([]);
         }
         for(let i = 0; i < this.allCharacters.length; i++){
@@ -33,40 +33,54 @@ export default class TierListChart extends React.Component{
         }
         return charactersByRow;
     }
+
     createRows(charactersByRow){
         let rows = [];
-        for(let i = 0; i < this.rowCount; i++){
+        for(let i = 0; i < this.state.rowCount; i++){
             rows.push(
                 <TierListRow key = {i} 
                     onDrop = {(e)=>this.props.onDrop(e,i+1)} 
                     characters = {charactersByRow[i]} 
                     placeholder = {this.defaultPlaceHolderText[i]}
-                    onClick = {(event)=>this.onClick(event)}/>
+                    onClick = {(event,rowCount)=>this.onClick(event,i)}/>
             );
         }
         return rows;
     }
+    insertRow(row){
+        console.log(row);
+    }
+    deleteRow(row){
+        console.log(row);
+    }
     renderContextMenu = () => {
         let menu = null;
         if(this.state.menuExpanded){
-            menu = <ContextMenu topEdge = {this.state.menu_Y} leftEdge = {this.state.menu_X} menuOptions = {["option1","option2"]}></ContextMenu>
+            menu = 
+            <ContextMenu 
+                topEdge = {this.state.menu_Y} 
+                leftEdge = {this.state.menu_X} 
+                menuOptionNames = {["Insert Row", "Delete Row","Reset Row"]}
+                menuOptionFunctions ={[()=>this.insertRow(this.state.contextMenuRow),()=>this.deleteRow(this.state.contextMenuRow), ()=>this.props.resetRow(this.state.contextMenuRow)]}>
+            </ContextMenu>
         }
         return menu;
     }
-    onClick = (event) =>{
+    onClick = (event,row) =>{
         let nextMenuExpandedState = !this.state.menuExpanded;
         let rect = document.getElementById("TierListTable").getBoundingClientRect();
         this.setState({
             menuExpanded : nextMenuExpandedState,
             menu_X: event.clientX - rect.left,
             menu_Y: event.clientY - rect.top,
+            contextMenuRow: row,
         });
     }
     render(){
         let charactersByRow = this.addCharacters(this.props.characterList);
         let rows = this.createRows(charactersByRow);
         return(
-            <div className = "tierListTable" id = "TierListTable" onClick = {()=> this.state.menuExpanded?this.setState({menuExpanded:false}):0}>
+            <div className = "tierListTable" id = "TierListTable" onClick = {()=> this.state.menuExpanded?this.setState({menuExpanded:false}):false}>
                 {rows}
                 {this.renderContextMenu()}
             </div>

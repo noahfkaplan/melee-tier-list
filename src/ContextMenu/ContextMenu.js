@@ -3,18 +3,17 @@ import React from "react"
 export default class ContextMenu extends React.Component{
     constructor(props){
         super(props);
-        this.menuOptions = props.menuOptions;
+        this.menuOptionNames = props.menuOptionNames;
+        this.menuOptionFunctions = props.menuOptionFunctions;
         this.menuOptionButtons = [];
-        this.topEdge = this.props.topEdge;
-        this.leftEdge = this.props.leftEdge;
-        this.isVisible = this.props.isVisible;
+        this.topEdge = props.topEdge;
+        this.leftEdge = props.leftEdge;
+        this.isVisible = props.isVisible;
     }
-
+    
     addMenuOptions(){
-        this.menuOptionButtons = this.menuOptions.map((option) => 
-            <div key = {option}>
-                <button className = "contextMenuOption">{option}</button>
-            </div>
+        this.menuOptionButtons = this.menuOptionNames.map((option,index) => 
+            <button key = {option} className = "contextMenuOption" onClick = {() => this.menuOptionFunctions[index]()}>{option}</button>
         ); 
     }
 

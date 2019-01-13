@@ -14,6 +14,20 @@ export default class WindowGrid extends React.Component{
             stillHoveredOverCharacter: false,
         };
     };
+    resetRow(rowNumber){
+        let newInSelectionGrid = this.state.inSelectionGrid;
+        let newInTierListGrid = this.state.inTierListGrid;
+        //return icons from reset row to the selection grid
+        let returnedIcons = newInTierListGrid.filter((pair) => pair[1] === rowNumber);
+        returnedIcons = returnedIcons.map((pair) => pair[0]);
+        newInSelectionGrid.push(...returnedIcons);
+        //filter out items from tierlistgrid that are in the reset row
+        newInTierListGrid = newInTierListGrid.filter((pair) => pair[1] !== rowNumber);
+        this.setState({
+            inTierListGrid : newInTierListGrid,
+            newInSelectionGrid : newInSelectionGrid,
+        })
+    }
     moveCharacters(currentCharacter,currentRow){        
         if(currentCharacter !== this.state.hoveredCharacter){
             let newInSelectionGrid = this.state.inSelectionGrid.slice();
@@ -45,6 +59,7 @@ export default class WindowGrid extends React.Component{
             });
         }
     }
+
     onDrop(ev, row){
         let name = ev.dataTransfer.getData("name");
         this.moveCharacters(name,row);
@@ -72,7 +87,8 @@ export default class WindowGrid extends React.Component{
                         characterList = {this.state.inTierListGrid} 
                         onDrop = {(ev,row) => this.onDrop(ev,row)}
                         onDragOver = {(e,character) =>this.onDragOverIcon(e,character)}
-                        onDragLeave = {(e)=>this.onDragLeaveIcon(e)}/>
+                        onDragLeave = {(e)=>this.onDragLeaveIcon(e)}
+                        resetRow = {(row)=>this.resetRow(row)}/>
                     <CharacterSelectionGrid 
                         characterList = {this.state.inSelectionGrid}
                         onDrop = {(ev,row) => this.onDrop(ev,row)}
