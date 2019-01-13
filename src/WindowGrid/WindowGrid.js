@@ -27,8 +27,23 @@ export default class WindowGrid extends React.Component{
         newInTierListGrid = newInTierListGrid.map((pair) => pair[1]>rowNumber?[pair[0],pair[1]-1]:[pair[0],pair[1]]);
         this.setState({
             inTierListGrid : newInTierListGrid,
-            newInSelectionGrid : newInSelectionGrid,
+            inSelectionGrid : newInSelectionGrid,
         });
+    }
+    insertRowAbove(rowNumber){
+        let newInTierListGrid = this.state.inTierListGrid;
+        newInTierListGrid = newInTierListGrid.map((pair) => pair[1]>=rowNumber?[pair[0],pair[1]+1]:[pair[0],pair[1]]);
+        console.log(newInTierListGrid);
+        this.setState({
+            inTierListGrid : newInTierListGrid,
+        })
+    }
+    insertRowBelow(rowNumber){
+        let newInTierListGrid = this.state.inTierListGrid;
+        newInTierListGrid = newInTierListGrid.map((pair) => pair[1]>rowNumber?[pair[0],pair[1]+1]:[pair[0],pair[1]]);
+        this.setState({
+            inTierListGrid : newInTierListGrid,
+        })
     }
     resetRow(rowNumber){
         let newInSelectionGrid = this.state.inSelectionGrid;
@@ -41,7 +56,7 @@ export default class WindowGrid extends React.Component{
         newInTierListGrid = newInTierListGrid.filter((pair) => pair[1] !== rowNumber);
         this.setState({
             inTierListGrid : newInTierListGrid,
-            newInSelectionGrid : newInSelectionGrid,
+            inSelectionGrid : newInSelectionGrid,
         });
     }
     moveCharacters(currentCharacter,currentRow){        
@@ -105,7 +120,9 @@ export default class WindowGrid extends React.Component{
                         onDragOver = {(e,character) =>this.onDragOverIcon(e,character)}
                         onDragLeave = {(e)=>this.onDragLeaveIcon(e)}
                         resetRow = {(row)=>this.resetRow(row)}
-                        deleteRow = {(row)=>this.deleteRow(row)}/>
+                        deleteRow = {(row)=>this.deleteRow(row)}
+                        insertRowAbove = {(row)=>this.insertRowAbove(row)}
+                        insertRowBelow = {(row)=>this.insertRowBelow(row)}/>
                     <CharacterSelectionGrid 
                         characterList = {this.state.inSelectionGrid}
                         onDrop = {(ev,row) => this.onDrop(ev,row)}

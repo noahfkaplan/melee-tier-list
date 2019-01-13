@@ -56,8 +56,25 @@ export default class TierListChart extends React.Component{
         }
         return rows;
     }
-    insertRow(row){
-        console.log(row);
+    insertRowAbove(row){
+        this.props.insertRowAbove(row);
+        this.defaultPlaceHolderText.splice(row,0,"new");
+        let newLabelTexts = this.state.labelTexts;
+        newLabelTexts.splice(row,0,"");
+        this.setState({
+            rowCount: this.state.rowCount+1,
+            labelTexts: newLabelTexts,
+        })
+    }
+    insertRowBelow(row){
+        this.props.insertRowBelow(row);
+        this.defaultPlaceHolderText.splice(row+1,0,"new");
+        let newLabelTexts = this.state.labelTexts;
+        newLabelTexts.splice(row+1,0,"");
+        this.setState({
+            rowCount: this.state.rowCount+1,
+            labelTexts: newLabelTexts,
+        })
     }
     deleteRow(row){
         this.props.deleteRow(row);
@@ -77,8 +94,11 @@ export default class TierListChart extends React.Component{
             <ContextMenu 
                 topEdge = {this.state.menu_Y} 
                 leftEdge = {this.state.menu_X} 
-                menuOptionNames = {["Insert Row", "Delete Row","Reset Row"]}
-                menuOptionFunctions ={[()=>this.insertRow(this.state.contextMenuRow),()=>this.deleteRow(this.state.contextMenuRow), ()=>this.props.resetRow(this.state.contextMenuRow)]}>
+                menuOptionNames = {["Insert Row Above","Insert Row Below","Delete Row","Reset Row"]}
+                menuOptionFunctions = {[()=>this.insertRowAbove(this.state.contextMenuRow),
+                                        ()=>this.insertRowBelow(this.state.contextMenuRow),
+                                        ()=>this.deleteRow(this.state.contextMenuRow), 
+                                        ()=>this.props.resetRow(this.state.contextMenuRow)]}>
             </ContextMenu>
         }
         return menu;
