@@ -8,7 +8,6 @@ export default class ContextMenu extends React.Component{
         this.menuOptionButtons = [];
         this.topEdge = props.topEdge;
         this.leftEdge = props.leftEdge;
-        this.isVisible = props.isVisible;
     }
     
     addMenuOptions(){
