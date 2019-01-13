@@ -33,7 +33,7 @@ export default class TierListRow extends React.Component{
                 onDrop = {(e)=>this.onDrop(e)} 
                 onDragOver = {(e)=>this.onDragOver(e)}
                 onDragLeave = {()=>this.onDragLeave()}>
-                <RowLabel placeholder = {this.props.placeholder}/>
+                <RowLabel onClick = {(event)=>this.props.onClick(event)} placeholder = {this.props.placeholder}/>
                 {this.props.characters}
             </div>
         );

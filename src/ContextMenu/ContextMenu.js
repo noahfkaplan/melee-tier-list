@@ -21,7 +21,7 @@ export default class ContextMenu extends React.Component{
     render(){
         this.addMenuOptions();
         return(
-            <div className = "ContextMenu">
+            <div className = "contextMenu">
                 {this.menuOptionButtons}
             </div>
         );
