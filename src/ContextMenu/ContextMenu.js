@@ -14,6 +14,7 @@ export default class ContextMenu extends React.Component{
         this.menuOptionButtons = this.menuOptionNames.map((option,index) => 
             <button key = {option} 
                 className = {this.state.highlightedRow === index?"highlightedContextMenuOption":"contextMenuOption"}
+                data-testid = {this.state.highlightedRow === index?"highlighted":"not-highlighted"}
                 onClick = {() => this.menuOptionFunctions[index]()}
                 onMouseOver = {() => this.setState({highlightedRow: index})}
                 onMouseOut = {() => this.setState({highlightedRow: -1})}>
