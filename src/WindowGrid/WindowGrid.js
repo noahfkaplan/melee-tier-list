@@ -33,7 +33,6 @@ export default class WindowGrid extends React.Component{
     insertRowAbove(rowNumber){
         let newInTierListGrid = this.state.inTierListGrid;
         newInTierListGrid = newInTierListGrid.map((pair) => pair[1]>=rowNumber?[pair[0],pair[1]+1]:[pair[0],pair[1]]);
-        console.log(newInTierListGrid);
         this.setState({
             inTierListGrid : newInTierListGrid,
         })
@@ -97,14 +96,12 @@ export default class WindowGrid extends React.Component{
     }
     onDragOverIcon(ev, hoveredCharacter){
         ev.preventDefault();
-        console.log('drag over', hoveredCharacter);
         this.setState({
             hoveredCharacter: hoveredCharacter,
         })
     }
     onDragLeaveIcon(ev){
         ev.preventDefault();
-        console.log('not over character anymore');
         this.setState({
             hoveredCharacter: null,
         })

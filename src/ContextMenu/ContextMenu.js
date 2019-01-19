@@ -8,11 +8,17 @@ export default class ContextMenu extends React.Component{
         this.menuOptionButtons = [];
         this.topEdge = props.topEdge;
         this.leftEdge = props.leftEdge;
+        this.state = { highlightedRow: -1};
     }
-    
     addMenuOptions(){
         this.menuOptionButtons = this.menuOptionNames.map((option,index) => 
-            <button key = {option} className = "contextMenuOption" onClick = {() => this.menuOptionFunctions[index]()}>{option}</button>
+            <button key = {option} 
+                className = {this.state.highlightedRow === index?"highlightedContextMenuOption":"contextMenuOption"}
+                onClick = {() => this.menuOptionFunctions[index]()}
+                onMouseOver = {() => this.setState({highlightedRow: index})}
+                onMouseOut = {() => this.setState({highlightedRow: -1})}>
+                {option}
+            </button>
         ); 
     }
 
