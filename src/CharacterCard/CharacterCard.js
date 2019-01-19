@@ -16,7 +16,7 @@ export default class CharacterCard extends React.Component{
                 onDragStart={(e)=>this.onDragStart(e, this.characterName)}
                 onDragOver = {(e,character)=>this.props.onDragOver(e,this.characterName)}
                 onDragLeave ={(e)=>this.props.onDragLeave(e)}>
-                <img  className = "characterImg" src={this.characterImg} alt={this.characterName}/>
+                <img className = "characterImg" src={this.characterImg} alt={this.characterName}/>
             </div>
         );
     }
