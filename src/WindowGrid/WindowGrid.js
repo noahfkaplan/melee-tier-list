@@ -33,7 +33,6 @@ export default class WindowGrid extends React.Component{
     insertRowAbove(rowNumber){
         let newInTierListGrid = this.state.inTierListGrid;
         newInTierListGrid = newInTierListGrid.map((pair) => pair[1]>=rowNumber?[pair[0],pair[1]+1]:[pair[0],pair[1]]);
-        console.log(newInTierListGrid);
         this.setState({
             inTierListGrid : newInTierListGrid,
         })
@@ -66,7 +65,7 @@ export default class WindowGrid extends React.Component{
 
             newInSelectionGrid = this.state.inSelectionGrid.filter( character => character !== currentCharacter);
             newInTierListGrid = this.state.inTierListGrid.filter( pair => pair[0] !== currentCharacter);
-            if(currentRow === 7){
+            if(currentRow === -1){
                 if(this.state.hoveredCharacter === null){
                     newInSelectionGrid.push(currentCharacter);
                 }
@@ -77,11 +76,11 @@ export default class WindowGrid extends React.Component{
             }
             else{
                 if(this.state.hoveredCharacter === null){
-                    newInTierListGrid.push([currentCharacter,currentRow-1]);
+                    newInTierListGrid.push([currentCharacter,currentRow]);
                 }
                 else{
                     let index = newInTierListGrid.findIndex(([character,row]) => character === this.state.hoveredCharacter);
-                    newInTierListGrid.splice(index,0,[currentCharacter,currentRow-1]);
+                    newInTierListGrid.splice(index,0,[currentCharacter,currentRow]);
                 }
             }
             this.setState({
@@ -97,14 +96,12 @@ export default class WindowGrid extends React.Component{
     }
     onDragOverIcon(ev, hoveredCharacter){
         ev.preventDefault();
-        console.log('drag over', hoveredCharacter);
         this.setState({
             hoveredCharacter: hoveredCharacter,
         })
     }
     onDragLeaveIcon(ev){
         ev.preventDefault();
-        console.log('not over character anymore');
         this.setState({
             hoveredCharacter: null,
         })
