@@ -25,7 +25,7 @@ export default class CharacterSelectionGrid extends React.Component{
     }
     render(){
         return(   
-            <div className = "droppable" onDrop = {(e)=>this.props.onDrop(e,-1)} onDragOver = {(e)=>this.onDragOver(e)}>
+            <div className = "droppable" data-testid = "CharacterSelectionGrid" onDrop = {(e)=>this.props.onDrop(e,-1)} onDragOver = {(e)=>this.onDragOver(e)}>
                 <div className = "characterSelectionGrid" >
                     {this.getCharacterIcons(this.props.characterList)}
                 </div>

@@ -34,5 +34,4 @@ test("It is highlighted on mouseOver", () => {
     const optionsAfterMouseOver = getAllByTestId("highlighted");
     expect(optionsBeforeMouseOver).toHaveLength(2);
     expect(optionsAfterMouseOver).toHaveLength(1);
-
 });
