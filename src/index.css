@@ -9,10 +9,6 @@
   height: 33%;
   width: 11%;
 }
-.droppable{
-  display: flex;
-  align-self: center;
-}
 .characterSelectionGrid{
   display: flex;
   align-self: center;
@@ -20,8 +16,9 @@
   flex-wrap: wrap;
   justify-content: center;
   padding: 25px;
+  width: 100%;
   max-width: 750px;
-
+  min-height: 100px;
 }
 .mainGridWrapper{
   display:grid;
@@ -78,7 +75,7 @@
   outline: none;
   background-color: transparent;
   border: none;
-  padding: 0px,2px,2px,2px;
+  padding: 0px 4px 4px 4px; 
   flex: 1;
 }
 .tierListTable{
