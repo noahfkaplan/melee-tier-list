@@ -1,5 +1,4 @@
 import React from "react"
-import ReactDOM from "react-dom"
 import CharacterCard from "./CharacterCard"
 import { render, fireEvent, cleanup } from "react-testing-library";
 

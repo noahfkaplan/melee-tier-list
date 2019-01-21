@@ -13,5 +13,4 @@ export default function RowLabel(props){
             </textarea>
         </div>
     );
-
 }
