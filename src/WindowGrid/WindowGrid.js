@@ -114,8 +114,8 @@ export default class WindowGrid extends React.Component{
                     <TierListChart 
                         characterList = {this.state.inTierListGrid} 
                         onDrop = {(ev,row) => this.onDrop(ev,row)}
-                        onDragOver = {(e,character) =>this.onDragOverIcon(e,character)}
-                        onDragLeave = {(e)=>this.onDragLeaveIcon(e)}
+                        onDragOverIcon = {(e,character) =>this.onDragOverIcon(e,character)}
+                        onDragLeaveIcon = {(e)=>this.onDragLeaveIcon(e)}
                         resetRow = {(row)=>this.resetRow(row)}
                         deleteRow = {(row)=>this.deleteRow(row)}
                         insertRowAbove = {(row)=>this.insertRowAbove(row)}

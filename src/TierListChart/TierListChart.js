@@ -1,12 +1,10 @@
 import React from "react"
-import CharacterCard from "../CharacterCard/CharacterCard"
 import TierListRow from "../TierListRow/TierListRow"
 import ContextMenu from "../ContextMenu/ContextMenu"
 
 export default class TierListChart extends React.Component{
     constructor(props){
         super(props);
-        this.allCharacters = this.props.characterList;
         this.defaultPlaceHolderText = ['S','A','B','C','D','F'];
         this.state = {
             labelTexts: ["","","","","",""],
@@ -16,24 +14,6 @@ export default class TierListChart extends React.Component{
             rowCount: 6,
         }
     }
-    addCharacters(characterList){
-        this.allCharacters = characterList;
-        let charactersByRow = [];
-        for(let i = 0; i < this.state.rowCount; i++){
-            charactersByRow.push([]);
-        }
-        for(let i = 0; i < this.allCharacters.length; i++){
-            charactersByRow[this.allCharacters[i][1]].push(
-                <CharacterCard 
-                    className = "characterIcon" 
-                    onDragOver = {(e,character)=>this.props.onDragOver(e,character)}
-                    onDragLeave ={(e)=>this.props.onDragLeave(e)}
-                    key = {this.allCharacters[i][0]}
-                    name = {this.allCharacters[i][0]}>
-                </CharacterCard>);
-        }
-        return charactersByRow;
-    }
     onTextChange(text, row){
         let newText = this.state.labelTexts;
         newText[row] = text;
@@ -41,13 +21,17 @@ export default class TierListChart extends React.Component{
             labelTexts: newText,
         });      
     }
-    createRows(charactersByRow){
+    createRows(){
         let rows = [];
         for(let i = 0; i < this.state.rowCount; i++){
+            let characters = this.props.characterList.filter((pair) => pair[1] === i);
+            characters = characters.map((pair)=>pair[0]);
             rows.push(
                 <TierListRow key = {i} 
                     onDrop = {(e)=>this.props.onDrop(e,i)} 
-                    characters = {charactersByRow[i]} 
+                    characters = {characters}
+                    onDragOverIcon = {(e,character)=>this.props.onDragOverIcon(e,character)} 
+                    onDragLeaveIcon = {(e)=>this.props.onDragLeaveIcon(e)}
                     placeholder = {this.defaultPlaceHolderText[i]}
                     onChange = {(text,row) => this.onTextChange(text,i)}
                     text = {this.state.labelTexts[i]}
@@ -114,11 +98,9 @@ export default class TierListChart extends React.Component{
         });
     }
     render(){
-        let charactersByRow = this.addCharacters(this.props.characterList);
-        let rows = this.createRows(charactersByRow);
         return(
             <div className = "tierListTable" id = "TierListTable" onClick = {()=> this.state.menuExpanded?this.setState({menuExpanded:false}):false}>
-                {rows}
+                {this.createRows()}
                 {this.renderContextMenu()}
             </div>
         );
