@@ -19,17 +19,17 @@ test("It should render the correct icons", ()=>{
 });
 test("It should highlight on dragOver", ()=>{
     const {getByTestId} = setup(["fox"]);
-    let row = getByTestId("not-highlighted");
+    let row = getByTestId("row-not-highlighted");
     fireEvent.dragOver(row)
-    row = getByTestId("highlighted");
+    row = getByTestId("row-highlighted");
     expect(row).toBeDefined();
 });
 test("It should stop highlighting on dragLeave", ()=>{
     const {getByTestId} = setup(["fox"]);
-    let row = getByTestId("not-highlighted");
+    let row = getByTestId("row-not-highlighted");
     fireEvent.dragOver(row)
-    row = getByTestId("highlighted");
+    row = getByTestId("row-highlighted");
     fireEvent.dragLeave(row);
-    row = getByTestId("not-highlighted");
+    row = getByTestId("row-not-highlighted");
     expect(row).toBeDefined();
 });

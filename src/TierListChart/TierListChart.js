@@ -21,13 +21,24 @@ export default class TierListChart extends React.Component{
             labelTexts: newText,
         });      
     }
+    onClick = (event,row) =>{
+        let nextMenuExpandedState = !this.state.menuExpanded;
+        let rect = document.getElementById("TierListChart").getBoundingClientRect();
+        this.setState({
+            menuExpanded : nextMenuExpandedState,
+            menu_X: event.clientX - rect.left,
+            menu_Y: event.clientY - rect.top,
+            contextMenuRow: row,
+        });
+    }
     createRows(){
         let rows = [];
         for(let i = 0; i < this.state.rowCount; i++){
             let characters = this.props.characterList.filter((pair) => pair[1] === i);
             characters = characters.map((pair)=>pair[0]);
             rows.push(
-                <TierListRow key = {i} 
+                <TierListRow
+                    key = {i} 
                     onDrop = {(e)=>this.props.onDrop(e,i)} 
                     characters = {characters}
                     onDragOverIcon = {(e,character)=>this.props.onDragOverIcon(e,character)} 
@@ -40,21 +51,11 @@ export default class TierListChart extends React.Component{
         }
         return rows;
     }
-    insertRowAbove(row){
-        this.props.insertRowAbove(row);
+    insertRow(row){
+        this.props.insertRow(row);
         this.defaultPlaceHolderText.splice(row,0,"new");
         let newLabelTexts = this.state.labelTexts;
         newLabelTexts.splice(row,0,"");
-        this.setState({
-            rowCount: this.state.rowCount+1,
-            labelTexts: newLabelTexts,
-        })
-    }
-    insertRowBelow(row){
-        this.props.insertRowBelow(row);
-        this.defaultPlaceHolderText.splice(row+1,0,"new");
-        let newLabelTexts = this.state.labelTexts;
-        newLabelTexts.splice(row+1,0,"");
         this.setState({
             rowCount: this.state.rowCount+1,
             labelTexts: newLabelTexts,
@@ -79,27 +80,17 @@ export default class TierListChart extends React.Component{
                 topEdge = {this.state.menu_Y} 
                 leftEdge = {this.state.menu_X} 
                 menuOptionNames = {["Insert Row Above","Insert Row Below","Delete Row","Reset Row"]}
-                menuOptionFunctions = {[()=>this.insertRowAbove(this.state.contextMenuRow),
-                                        ()=>this.insertRowBelow(this.state.contextMenuRow),
+                menuOptionFunctions = {[()=>this.insertRow(this.state.contextMenuRow),
+                                        ()=>this.insertRow(this.state.contextMenuRow+1),
                                         ()=>this.deleteRow(this.state.contextMenuRow), 
                                         ()=>this.props.resetRow(this.state.contextMenuRow)]}>
             </ContextMenu>
         }
         return menu;
     }
-    onClick = (event,row) =>{
-        let nextMenuExpandedState = !this.state.menuExpanded;
-        let rect = document.getElementById("TierListTable").getBoundingClientRect();
-        this.setState({
-            menuExpanded : nextMenuExpandedState,
-            menu_X: event.clientX - rect.left,
-            menu_Y: event.clientY - rect.top,
-            contextMenuRow: row,
-        });
-    }
     render(){
         return(
-            <div className = "tierListTable" id = "TierListTable" onClick = {()=> this.state.menuExpanded?this.setState({menuExpanded:false}):false}>
+            <div className = "tierListChart" id = "TierListChart" data-testid = "TierListChart" onClick = {()=> this.state.menuExpanded?this.setState({menuExpanded:false}):false}>
                 {this.createRows()}
                 {this.renderContextMenu()}
             </div>

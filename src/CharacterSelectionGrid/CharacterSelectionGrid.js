@@ -8,8 +8,8 @@ export default class CharacterSelectionGrid extends React.Component{
             return (
                 <CharacterCard 
                     className = "characterIcon"
-                    onDragOver = {(e,character) => this.props.onDragOver(e,character)}
-                    onDragLeave ={(e)=>this.props.onDragLeave(e)}
+                    onDragOver = {(e,character) => this.props.onDragOverIcon(e,character)}
+                    onDragLeave ={(e)=>this.props.onDragLeaveIcon(e)}
                     key = {name}
                     name ={name}/>
             );

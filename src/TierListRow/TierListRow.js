@@ -25,7 +25,7 @@ export default class TierListRow extends React.Component{
         return(
             <div 
                 className = {this.state.isHighlighted?"tierListRowHighlighted":"tierListRow"}
-                data-testid = {this.state.isHighlighted?"highlighted":"not-highlighted"} 
+                data-testid = {this.state.isHighlighted?"row-highlighted":"row-not-highlighted"}
                 onDrop = {(e)=>{this.props.onDrop(e); this.setState({isHighlighted: false});}} 
                 onDragOver = {(e)=>{e.preventDefault(); this.setState({isHighlighted: true});}}
                 onDragLeave = {()=>this.setState({isHighlighted: false})}>

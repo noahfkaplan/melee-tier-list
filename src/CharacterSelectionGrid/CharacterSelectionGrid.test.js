@@ -6,8 +6,8 @@ const setup = (characterList, drop,dragOver,dragLeave) => {
     const {getByAltText, getByTestId} = render(<CharacterSelectionGrid 
         characterList = {characterList} 
         onDrop = {drop}
-        onDragOver ={dragOver}
-        onDragLeave ={dragLeave}/>);
+        onDragOverIcon ={dragOver}
+        onDragLeaveIcon ={dragLeave}/>);
     return {getByAltText, getByTestId};
 }
 
