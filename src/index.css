@@ -3,15 +3,11 @@
   width:78px;
   border-style: solid;
   border-color: white;
-  border-radius: 8px;
+  border-radius: 4px;
 }
 .characterIcon{
   height: 33%;
   width: 11%;
-}
-.droppable{
-  display: flex;
-  align-self: center;
 }
 .characterSelectionGrid{
   display: flex;
@@ -20,8 +16,9 @@
   flex-wrap: wrap;
   justify-content: center;
   padding: 25px;
+  width: 100%;
   max-width: 750px;
-
+  min-height: 100px;
 }
 .mainGridWrapper{
   display:grid;
@@ -78,10 +75,10 @@
   outline: none;
   background-color: transparent;
   border: none;
-  padding: 0px,2px,2px,2px;
+  padding: 0px 4px 4px 4px; 
   flex: 1;
 }
-.tierListTable{
+.tierListChart{
   position: relative;
 }
 .contextMenu{
