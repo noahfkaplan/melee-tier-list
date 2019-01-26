@@ -5,6 +5,14 @@
   border-color: white;
   border-radius: 4px;
 }
+.characterImgTransparent{
+  height: 78px;
+  width:78px;
+  border-style: solid;
+  border-color: white;
+  border-radius: 4px;
+  opacity: .5;
+}
 .characterIcon{
   height: 33%;
   width: 11%;

@@ -4,7 +4,7 @@ import CharacterCard from "../CharacterCard/CharacterCard";
 export default class CharacterSelectionGrid extends React.Component{
     getCharacterIcons(){
         let characterList = this.props.characterList;
-        let icons = characterList.map((name) => {
+        let icons = characterList.map(([name,transparent]) => {
             return (
                 <CharacterCard 
                     className = "characterIcon"
@@ -12,7 +12,8 @@ export default class CharacterSelectionGrid extends React.Component{
                     onDragOver = {(e,character) => this.props.onDragOverIcon(e,character,-1)}
                     onDragLeave ={(e)=>this.props.onDragLeaveIcon(e)}
                     key = {name}
-                    name ={name}/>
+                    name ={name}
+                    transparent = {transparent}/>
             );
         })
         return icons;

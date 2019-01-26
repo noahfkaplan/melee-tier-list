@@ -6,36 +6,37 @@ export default class WindowGrid extends React.Component{
     constructor(props){
         super(props);
         this.state = {
-            inSelectionGrid : this.props.characterList,
+            inSelectionGrid : this.props.characterList.map((name)=>[name,false]),
             inTierListGrid : [],
             hoveredCharacter: null,
             stillHoveredOverCharacter: false,
             draggedCharacter: null,
+            transparentIconExists: false,
         };
     };
-    moveCharacters(currentCharacter,currentRow, transparent){        
+    moveCharacters(currentCharacter,currentRow, transparent){      
         if(currentCharacter !== this.state.hoveredCharacter){
             let newInSelectionGrid = this.state.inSelectionGrid.slice();
             let newInTierListGrid = this.state.inTierListGrid.slice();
 
-            newInSelectionGrid = this.state.inSelectionGrid.filter( character => character !== currentCharacter);
+            newInSelectionGrid = this.state.inSelectionGrid.filter( character => character[0] !== currentCharacter);
             newInTierListGrid = this.state.inTierListGrid.filter( pair => pair[0] !== currentCharacter);
             if(currentRow === -1){
                 if(this.state.hoveredCharacter === null){
-                    newInSelectionGrid.push(currentCharacter);
+                    newInSelectionGrid.push([currentCharacter,transparent]);
                 }
                 else{
-                    let index = newInSelectionGrid.findIndex((character) => this.state.hoveredCharacter === character);
-                    newInSelectionGrid.splice(index,0,currentCharacter);
+                    let index = newInSelectionGrid.findIndex((character) => this.state.hoveredCharacter === character[0]);
+                    newInSelectionGrid.splice(index,0,[currentCharacter,transparent]);
                 }
             }
             else{
                 if(this.state.hoveredCharacter === null){
-                    newInTierListGrid.push([currentCharacter,currentRow]);
+                    newInTierListGrid.push([currentCharacter,currentRow,transparent]);
                 }
                 else{
-                    let index = newInTierListGrid.findIndex(([character,row]) => character === this.state.hoveredCharacter);
-                    newInTierListGrid.splice(index,0,[currentCharacter,currentRow]);
+                    let index = newInTierListGrid.findIndex((character) => character[0] === this.state.hoveredCharacter);
+                    newInTierListGrid.splice(index,0,[currentCharacter,currentRow,transparent]);
                 }
             }
             this.setState({
@@ -49,22 +50,25 @@ export default class WindowGrid extends React.Component{
     }
     onDrop(row){
         this.moveCharacters(this.state.draggedCharacter,row,false);
-        this.setState({draggedCharacter: null});
+        this.setState({draggedCharacter: null, hoveredCharacter: null, transparentIconExists: false});
     }
     onDragOverIcon(ev, hoveredCharacter, row){
         ev.preventDefault();
-        console.log("current: " + this.state.draggedCharacter);
-        this.setState({
-            hoveredCharacter: hoveredCharacter,
-        });
-        console.log(hoveredCharacter);
-        this.moveCharacters(this.state.draggedCharacter,row,true)
+        if(hoveredCharacter !== this.state.draggedCharacter){
+            this.setState({
+                hoveredCharacter: hoveredCharacter,
+                transparentIconExists: true,
+            });
+            this.moveCharacters(this.state.draggedCharacter,row,true)
+        }
     }
     onDragLeaveIcon(ev){
         ev.preventDefault();
-        this.setState({
-            hoveredCharacter: null,
-        })
+        if(!this.state.transparentIconExists){
+            this.setState({
+                hoveredCharacter: null,
+            });
+        }
     }
     clearRowIcons(rowNumber){
         let newInSelectionGrid = this.state.inSelectionGrid;
@@ -110,7 +114,7 @@ export default class WindowGrid extends React.Component{
                         characterList = {this.state.inTierListGrid} 
                         onDragStart = {(name) => this.onDragStart(name)}
                         onDrop = {(row) => this.onDrop(row)}
-                        onDragOverIcon = {(e,character) =>this.onDragOverIcon(e,character)}
+                        onDragOverIcon = {(e,character,row) =>this.onDragOverIcon(e,character,row)}
                         onDragLeaveIcon = {(e)=>this.onDragLeaveIcon(e)}
                         resetRow = {(row)=>this.resetRow(row)}
                         deleteRow = {(row)=>this.deleteRow(row)}
@@ -119,7 +123,7 @@ export default class WindowGrid extends React.Component{
                         characterList = {this.state.inSelectionGrid}
                         onDragStart = {(name) => this.onDragStart(name)}
                         onDrop = {(row) => this.onDrop(row)}
-                        onDragOverIcon = {(e,character) =>this.onDragOverIcon(e,character)}
+                        onDragOverIcon = {(e,character,row) =>this.onDragOverIcon(e,character,row)}
                         onDragLeaveIcon = {(e)=>this.onDragLeaveIcon(e)}/>
                 </div>
             </div>
