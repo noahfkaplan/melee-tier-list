@@ -9,16 +9,23 @@ export default class WindowGrid extends React.Component{
             inSelectionGrid : this.props.characterList.map((name)=>[name,false]),
             inTierListGrid : [],
             hoveredCharacter: null,
-            stillHoveredOverCharacter: false,
             draggedCharacter: null,
-            transparentIconExists: false,
         };
     };
-    moveCharacters(currentCharacter,currentRow, transparent){      
-        if(currentCharacter !== this.state.hoveredCharacter){
-            let newInSelectionGrid = this.state.inSelectionGrid.slice();
-            let newInTierListGrid = this.state.inTierListGrid.slice();
-
+    moveCharacters(currentCharacter,currentRow, transparent){
+        let newInSelectionGrid = this.state.inSelectionGrid.slice();
+        let newInTierListGrid = this.state.inTierListGrid.slice();
+        if(currentCharacter === this.state.hoveredCharacter){
+            if(currentRow === -1){
+                let index = newInSelectionGrid.findIndex((character) => this.state.hoveredCharacter === character[0]);
+                newInSelectionGrid.splice(index,1,[currentCharacter,transparent]);
+            }
+            else{
+                let index = newInTierListGrid.findIndex((character) => character[0] === this.state.hoveredCharacter);
+                newInTierListGrid.splice(index,1,[currentCharacter,currentRow,transparent]);
+            }
+        }      
+        else{
             newInSelectionGrid = this.state.inSelectionGrid.filter( character => character[0] !== currentCharacter);
             newInTierListGrid = this.state.inTierListGrid.filter( pair => pair[0] !== currentCharacter);
             if(currentRow === -1){
@@ -39,36 +46,36 @@ export default class WindowGrid extends React.Component{
                     newInTierListGrid.splice(index,0,[currentCharacter,currentRow,transparent]);
                 }
             }
-            this.setState({
-                inSelectionGrid: newInSelectionGrid,
-                inTierListGrid: newInTierListGrid,
-            });
         }
+        this.setState({
+            inSelectionGrid: newInSelectionGrid,
+            inTierListGrid: newInTierListGrid,
+        });
     }
     onDragStart(name){
-        this.setState({draggedCharacter: name});
+        console.log("drag start");
+        this.setState({draggedCharacter: name, hoveredCharacter: null});
     }
     onDrop(row){
+        console.log("dragged: " + this.state.draggedCharacter);
+        console.log("hovered: "+ this.state.hoveredCharacter);
         this.moveCharacters(this.state.draggedCharacter,row,false);
-        this.setState({draggedCharacter: null, hoveredCharacter: null, transparentIconExists: false});
+        this.setState({draggedCharacter: null, hoveredCharacter: null,});
     }
     onDragOverIcon(ev, hoveredCharacter, row){
         ev.preventDefault();
-        if(hoveredCharacter !== this.state.draggedCharacter){
-            this.setState({
-                hoveredCharacter: hoveredCharacter,
-                transparentIconExists: true,
-            });
-            this.moveCharacters(this.state.draggedCharacter,row,true)
+        this.setState({
+            hoveredCharacter: hoveredCharacter,
+        });
+        if(this.state.draggedCharacter !== hoveredCharacter){
+            this.moveCharacters(this.state.draggedCharacter,row,true);            
         }
     }
     onDragLeaveIcon(ev){
         ev.preventDefault();
-        if(!this.state.transparentIconExists){
-            this.setState({
-                hoveredCharacter: null,
-            });
-        }
+        this.setState({
+            hoveredCharacter: null,
+        });
     }
     clearRowIcons(rowNumber){
         let newInSelectionGrid = this.state.inSelectionGrid;

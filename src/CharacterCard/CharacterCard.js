@@ -7,7 +7,6 @@ export default class CharacterCard extends React.Component{
         this.characterImg = require(`../characterIcons/${this.characterName}.png`);
     }
     render() {
-        console.log(this.props.transparent);
         return (
             <div className="draggable" 
                 draggable 
