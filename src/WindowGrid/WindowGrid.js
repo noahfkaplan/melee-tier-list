@@ -10,9 +10,10 @@ export default class WindowGrid extends React.Component{
             inTierListGrid : [],
             hoveredCharacter: null,
             stillHoveredOverCharacter: false,
+            draggedCharacter: null,
         };
     };
-    moveCharacters(currentCharacter,currentRow){        
+    moveCharacters(currentCharacter,currentRow, transparent){        
         if(currentCharacter !== this.state.hoveredCharacter){
             let newInSelectionGrid = this.state.inSelectionGrid.slice();
             let newInTierListGrid = this.state.inTierListGrid.slice();
@@ -43,16 +44,21 @@ export default class WindowGrid extends React.Component{
             });
         }
     }
-
-    onDrop(ev, row){
-        let name = ev.dataTransfer.getData("name");
-        this.moveCharacters(name,row);
+    onDragStart(name){
+        this.setState({draggedCharacter: name});
     }
-    onDragOverIcon(ev, hoveredCharacter){
+    onDrop(row){
+        this.moveCharacters(this.state.draggedCharacter,row,false);
+        this.setState({draggedCharacter: null});
+    }
+    onDragOverIcon(ev, hoveredCharacter, row){
         ev.preventDefault();
+        console.log("current: " + this.state.draggedCharacter);
         this.setState({
             hoveredCharacter: hoveredCharacter,
-        })
+        });
+        console.log(hoveredCharacter);
+        this.moveCharacters(this.state.draggedCharacter,row,true)
     }
     onDragLeaveIcon(ev){
         ev.preventDefault();
@@ -102,7 +108,8 @@ export default class WindowGrid extends React.Component{
                 <div className = "contentBody">
                     <TierListChart 
                         characterList = {this.state.inTierListGrid} 
-                        onDrop = {(ev,row) => this.onDrop(ev,row)}
+                        onDragStart = {(name) => this.onDragStart(name)}
+                        onDrop = {(row) => this.onDrop(row)}
                         onDragOverIcon = {(e,character) =>this.onDragOverIcon(e,character)}
                         onDragLeaveIcon = {(e)=>this.onDragLeaveIcon(e)}
                         resetRow = {(row)=>this.resetRow(row)}
@@ -110,7 +117,8 @@ export default class WindowGrid extends React.Component{
                         insertRow = {(row)=>this.insertRow(row)}/>
                     <CharacterSelectionGrid 
                         characterList = {this.state.inSelectionGrid}
-                        onDrop = {(ev,row) => this.onDrop(ev,row)}
+                        onDragStart = {(name) => this.onDragStart(name)}
+                        onDrop = {(row) => this.onDrop(row)}
                         onDragOverIcon = {(e,character) =>this.onDragOverIcon(e,character)}
                         onDragLeaveIcon = {(e)=>this.onDragLeaveIcon(e)}/>
                 </div>

@@ -39,9 +39,10 @@ export default class TierListChart extends React.Component{
             rows.push(
                 <TierListRow
                     key = {i} 
-                    onDrop = {(e)=>this.props.onDrop(e,i)} 
+                    onDrop = {()=>this.props.onDrop(i)} 
                     characters = {characters}
-                    onDragOverIcon = {(e,character)=>this.props.onDragOverIcon(e,character)} 
+                    onDragStart = {(name) => this.props.onDragStart(name)}
+                    onDragOverIcon = {(e,character)=>this.props.onDragOverIcon(e,character,i)} 
                     onDragLeaveIcon = {(e)=>this.props.onDragLeaveIcon(e)}
                     placeholder = {this.defaultPlaceHolderText[i]}
                     onChange = {(text,row) => this.onTextChange(text,i)}

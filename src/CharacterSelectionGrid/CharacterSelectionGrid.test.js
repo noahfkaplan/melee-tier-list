@@ -45,5 +45,5 @@ test("It should call passed in drop function with -1", () =>{
     const {getByTestId} = setup(characterList, drop,jest.fn(),jest.fn());
     const grid = getByTestId("CharacterSelectionGrid");
     fireEvent.drop(grid);
-    expect(drop).toBeCalledWith(expect.anything(),-1);
+    expect(drop).toBeCalledWith(-1);
 });
