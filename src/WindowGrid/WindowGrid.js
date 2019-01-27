@@ -114,25 +114,22 @@ export default class WindowGrid extends React.Component{
     }
     render(){
         return(
-            <div className = "mainGridWrapper">
-                <div className = "rightSideMenu"></div>
-                <div className = "contentBody">
-                    <TierListChart 
-                        characterList = {this.state.inTierListGrid} 
-                        onDragStart = {(name) => this.onDragStart(name)}
-                        onDrop = {(row) => this.onDrop(row)}
-                        onDragOverIcon = {(e,character,row) =>this.onDragOverIcon(e,character,row)}
-                        onDragLeaveIcon = {(e)=>this.onDragLeaveIcon(e)}
-                        resetRow = {(row)=>this.resetRow(row)}
-                        deleteRow = {(row)=>this.deleteRow(row)}
-                        insertRow = {(row)=>this.insertRow(row)}/>
-                    <CharacterSelectionGrid 
-                        characterList = {this.state.inSelectionGrid}
-                        onDragStart = {(name) => this.onDragStart(name)}
-                        onDrop = {(row) => this.onDrop(row)}
-                        onDragOverIcon = {(e,character,row) =>this.onDragOverIcon(e,character,row)}
-                        onDragLeaveIcon = {(e)=>this.onDragLeaveIcon(e)}/>
-                </div>
+            <div className = "contentBody">
+                <TierListChart 
+                    characterList = {this.state.inTierListGrid} 
+                    onDragStart = {(name) => this.onDragStart(name)}
+                    onDrop = {(row) => this.onDrop(row)}
+                    onDragOverIcon = {(e,character,row) =>this.onDragOverIcon(e,character,row)}
+                    onDragLeaveIcon = {(e)=>this.onDragLeaveIcon(e)}
+                    resetRow = {(row)=>this.resetRow(row)}
+                    deleteRow = {(row)=>this.deleteRow(row)}
+                    insertRow = {(row)=>this.insertRow(row)}/>
+                <CharacterSelectionGrid 
+                    characterList = {this.state.inSelectionGrid}
+                    onDragStart = {(name) => this.onDragStart(name)}
+                    onDrop = {(row) => this.onDrop(row)}
+                    onDragOverIcon = {(e,character,row) =>this.onDragOverIcon(e,character,row)}
+                    onDragLeaveIcon = {(e)=>this.onDragLeaveIcon(e)}/>
             </div>
         );
     }

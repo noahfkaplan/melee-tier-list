@@ -28,14 +28,6 @@
   max-width: 750px;
   min-height: 100px;
 }
-.mainGridWrapper{
-  display:grid;
-  grid-template-columns: 1fr 5fr;
-}
-.rightSideMenu{
-  /* to do*/
-}
-
 .contentBody{
   display:flex;
   flex-direction: column;  
