@@ -10,6 +10,7 @@ export default class WindowGrid extends React.Component{
             inTierListGrid : [],
             hoveredCharacter: null,
             draggedCharacter: null,
+            currentRow: -1,
         };
     };
     moveCharacters(currentCharacter,currentRow, transparent){
@@ -53,14 +54,11 @@ export default class WindowGrid extends React.Component{
         });
     }
     onDragStart(name){
-        console.log("drag start");
         this.setState({draggedCharacter: name, hoveredCharacter: null});
     }
     onDrop(row){
-        console.log("dragged: " + this.state.draggedCharacter);
-        console.log("hovered: "+ this.state.hoveredCharacter);
         this.moveCharacters(this.state.draggedCharacter,row,false);
-        this.setState({draggedCharacter: null, hoveredCharacter: null,});
+        this.setState({draggedCharacter: null, hoveredCharacter: null,currentRow: -1});
     }
     onDragOverIcon(ev, hoveredCharacter, row){
         ev.preventDefault();
@@ -69,6 +67,12 @@ export default class WindowGrid extends React.Component{
         });
         if(this.state.draggedCharacter !== hoveredCharacter){
             this.moveCharacters(this.state.draggedCharacter,row,true);            
+        }
+    }
+    onDragOverRow(row){
+        if(this.state.hoveredCharacter === null && row !== this.state.currentRow){
+            this.setState({currentRow: row});
+            this.moveCharacters(this.state.draggedCharacter, row, true);
         }
     }
     onDragLeaveIcon(ev){
@@ -120,6 +124,7 @@ export default class WindowGrid extends React.Component{
                     onDragStart = {(name) => this.onDragStart(name)}
                     onDrop = {(row) => this.onDrop(row)}
                     onDragOverIcon = {(e,character,row) =>this.onDragOverIcon(e,character,row)}
+                    onDragOverRow = {(row) => this.onDragOverRow(row)}
                     onDragLeaveIcon = {(e)=>this.onDragLeaveIcon(e)}
                     resetRow = {(row)=>this.resetRow(row)}
                     deleteRow = {(row)=>this.deleteRow(row)}
