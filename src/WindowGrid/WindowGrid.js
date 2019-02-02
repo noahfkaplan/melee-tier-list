@@ -86,7 +86,7 @@ export default class WindowGrid extends React.Component{
         let newInTierListGrid = this.state.inTierListGrid;
         //return icons from reset row to the selection grid
         let returnedIcons = newInTierListGrid.filter((pair) => pair[1] === rowNumber);
-        returnedIcons = returnedIcons.map((pair) => pair[0]);
+        returnedIcons = returnedIcons.map((pair) => [pair[0],false]);
         newInSelectionGrid.push(...returnedIcons);
         //filter out items from tierlistgrid that are in the reset row
         newInTierListGrid = newInTierListGrid.filter((pair) => pair[1] !== rowNumber);
@@ -95,7 +95,7 @@ export default class WindowGrid extends React.Component{
     deleteRow(rowNumber){
         let {newInSelectionGrid,newInTierListGrid} = this.clearRowIcons(rowNumber);
         //decrement all row numbers larger than the deleted row
-        newInTierListGrid = newInTierListGrid.map((pair) => pair[1]>rowNumber?[pair[0],pair[1]-1]:[pair[0],pair[1]]);
+        newInTierListGrid = newInTierListGrid.map((pair) => pair[1]>rowNumber?[pair[0],pair[1]-1,false]:[pair[0],pair[1]],false);
         this.setState({
             inTierListGrid : newInTierListGrid,
             inSelectionGrid : newInSelectionGrid,
