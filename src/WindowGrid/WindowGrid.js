@@ -14,36 +14,38 @@ export default class WindowGrid extends React.Component{
         };
     };
     moveCharacters(currentCharacter,currentRow, transparent){
+        console.log("moving characters");
         let newInSelectionGrid = this.state.inSelectionGrid.slice();
         let newInTierListGrid = this.state.inTierListGrid.slice();
-        if(currentCharacter === this.state.hoveredCharacter){
+        let hoveredCharacter = this.state.hoveredCharacter;
+        if(currentCharacter === hoveredCharacter){
             if(currentRow === -1){
-                let index = newInSelectionGrid.findIndex((character) => this.state.hoveredCharacter === character[0]);
+                let index = newInSelectionGrid.findIndex((character) => hoveredCharacter === character[0]);
                 newInSelectionGrid.splice(index,1,[currentCharacter,transparent]);
             }
             else{
-                let index = newInTierListGrid.findIndex((character) => character[0] === this.state.hoveredCharacter);
+                let index = newInTierListGrid.findIndex((character) => character[0] === hoveredCharacter);
                 newInTierListGrid.splice(index,1,[currentCharacter,currentRow,transparent]);
             }
         }      
         else{
-            newInSelectionGrid = this.state.inSelectionGrid.filter( character => character[0] !== currentCharacter);
-            newInTierListGrid = this.state.inTierListGrid.filter( pair => pair[0] !== currentCharacter);
+            newInSelectionGrid = newInSelectionGrid.filter( character => character[0] !== currentCharacter);
+            newInTierListGrid = newInTierListGrid.filter( pair => pair[0] !== currentCharacter);
             if(currentRow === -1){
-                if(this.state.hoveredCharacter === null){
+                if(hoveredCharacter === null){
                     newInSelectionGrid.push([currentCharacter,transparent]);
                 }
                 else{
-                    let index = newInSelectionGrid.findIndex((character) => this.state.hoveredCharacter === character[0]);
+                    let index = newInSelectionGrid.findIndex((character) => hoveredCharacter === character[0]);
                     newInSelectionGrid.splice(index,0,[currentCharacter,transparent]);
                 }
             }
             else{
-                if(this.state.hoveredCharacter === null){
+                if(hoveredCharacter === null){
                     newInTierListGrid.push([currentCharacter,currentRow,transparent]);
                 }
                 else{
-                    let index = newInTierListGrid.findIndex((character) => character[0] === this.state.hoveredCharacter);
+                    let index = newInTierListGrid.findIndex((character) => character[0] === hoveredCharacter);
                     newInTierListGrid.splice(index,0,[currentCharacter,currentRow,transparent]);
                 }
             }
@@ -57,22 +59,27 @@ export default class WindowGrid extends React.Component{
         this.setState({draggedCharacter: name, hoveredCharacter: null});
     }
     onDrop(row){
-        this.moveCharacters(this.state.draggedCharacter,row,false);
+        let draggedCharacter = this.state.draggedCharacter;
+        this.moveCharacters(draggedCharacter,row,false);
         this.setState({draggedCharacter: null, hoveredCharacter: null,currentRow: -1});
     }
     onDragOverIcon(ev, hoveredCharacter, row){
+        let draggedCharacter = this.state.draggedCharacter;
         ev.preventDefault();
         this.setState({
             hoveredCharacter: hoveredCharacter,
         });
-        if(this.state.draggedCharacter !== hoveredCharacter){
-            this.moveCharacters(this.state.draggedCharacter,row,true);            
+        if(draggedCharacter !== hoveredCharacter){
+            this.moveCharacters(draggedCharacter,row,true);            
         }
     }
     onDragOverRow(row){
-        if(this.state.hoveredCharacter === null && row !== this.state.currentRow){
+        let draggedCharacter = this.state.draggedCharacter;
+        let hoveredCharacter = this.state.hoveredCharacter;
+        let currentRow = this.state.currentRow;
+        if(hoveredCharacter === null && row !== currentRow){
             this.setState({currentRow: row});
-            this.moveCharacters(this.state.draggedCharacter, row, true);
+            this.moveCharacters(draggedCharacter, row, true);
         }
     }
     onDragLeaveIcon(ev){
