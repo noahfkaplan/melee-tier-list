@@ -10,13 +10,15 @@ export default class TierListRow extends React.Component{
         };
     }    
     createCharacterCards(){
-        let characters = this.props.characters.map((name) => 
+        let characters = this.props.characters.map(([name, transparent]) => 
                 <CharacterCard 
-                    className = "characterIcon" 
-                    onDragOver = {(e,name)=>this.props.onDragOverIcon(e,name)}
+                    className = "characterIcon"
+                    onDragStart = {() => this.props.onDragStart(name)} 
+                    onDragOver = {(e)=> this.props.onDragOverIcon(e,name)}
                     onDragLeave ={(e)=>this.props.onDragLeaveIcon(e)}
                     key = {name}
-                    name = {name}>
+                    name = {name}
+                    transparent = {transparent}>
                 </CharacterCard>
         );
         return characters;
@@ -26,8 +28,8 @@ export default class TierListRow extends React.Component{
             <div 
                 className = {this.state.isHighlighted?"tierListRowHighlighted":"tierListRow"}
                 data-testid = {this.state.isHighlighted?"row-highlighted":"row-not-highlighted"}
-                onDrop = {(e)=>{this.props.onDrop(e); this.setState({isHighlighted: false});}} 
-                onDragOver = {(e)=>{e.preventDefault(); this.setState({isHighlighted: true});}}
+                onDrop = {()=>{this.props.onDrop(); this.setState({isHighlighted: false});}} 
+                onDragOver = {(e)=>{e.preventDefault(); this.props.onDragOverRow(); this.setState({isHighlighted: true});}}
                 onDragLeave = {()=>this.setState({isHighlighted: false})}>
                 <RowLabel text = {this.props.text} onChange = {(text) => this.props.onChange(text)} onClick = {(event)=>this.props.onClick(event)} placeholder = {this.props.placeholder}/>
                 {this.createCharacterCards()}

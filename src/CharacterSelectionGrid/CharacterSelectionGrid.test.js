@@ -14,7 +14,7 @@ const setup = (characterList, drop,dragOver,dragLeave) => {
 afterEach(cleanup)
 
 test("It should render the correct character icons", () =>{
-    const characterList = ["fox","yoshi","bowser"];
+    const characterList = [["fox",false],["yoshi",false],["bowser",false]];
     const {getByAltText} = setup(characterList, jest.fn(),jest.fn(),jest.fn());
     const fox = getByAltText("fox");
     const yoshi = getByAltText("yoshi");
@@ -24,7 +24,7 @@ test("It should render the correct character icons", () =>{
     expect(bowser).toBeDefined();
 });
 test("It should pass the passed in onDragOver function to each characterIcon", () =>{
-    const characterList = ["fox"];
+    const characterList =  [["fox",false]];
     const dragOver = jest.fn();
     const {getByAltText} = setup(characterList, jest.fn(),dragOver,jest.fn());
     const fox = getByAltText("fox");
@@ -32,7 +32,7 @@ test("It should pass the passed in onDragOver function to each characterIcon", (
     expect(dragOver).toBeCalled();
 });
 test("It should pass the passed in onDragLeave function to each characterIcon", () =>{
-    const characterList = ["fox"];
+    const characterList = [["fox",false]];
     const dragLeave = jest.fn();
     const {getByAltText} = setup(characterList, jest.fn(),jest.fn(),dragLeave);
     const fox = getByAltText("fox");
@@ -40,10 +40,10 @@ test("It should pass the passed in onDragLeave function to each characterIcon", 
     expect(dragLeave).toBeCalled();
 });
 test("It should call passed in drop function with -1", () =>{
-    const characterList = ["fox"];
+    const characterList = [["fox",false]];
     const drop = jest.fn();
     const {getByTestId} = setup(characterList, drop,jest.fn(),jest.fn());
     const grid = getByTestId("CharacterSelectionGrid");
     fireEvent.drop(grid);
-    expect(drop).toBeCalledWith(expect.anything(),-1);
+    expect(drop).toBeCalledWith(-1);
 });
