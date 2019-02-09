@@ -10,15 +10,15 @@ export default class TierListRow extends React.Component{
         };
     }    
     createCharacterCards(){
-        let characters = this.props.characters.map(([name, transparent]) => 
+        let characters = this.props.characters.map((icons) => 
                 <CharacterCard 
                     className = "characterIcon"
-                    onDragStart = {() => this.props.onDragStart(name)} 
-                    onDragOver = {(e)=> this.props.onDragOverIcon(e,name)}
+                    onDragStart = {() => this.props.onDragStart(icons.characterName)} 
+                    onDragOver = {(e)=> this.props.onDragOverIcon(e,icons.characterName)}
                     onDragLeave ={(e)=>this.props.onDragLeaveIcon(e)}
-                    key = {name}
-                    name = {name}
-                    transparent = {transparent}>
+                    key = {icons.characterName}
+                    name = {icons.characterName}
+                    transparent = {icons.transparent}>
                 </CharacterCard>
         );
         return characters;

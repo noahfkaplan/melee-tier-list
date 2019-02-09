@@ -6,7 +6,7 @@ export default class WindowGrid extends React.Component{
     constructor(props){
         super(props);
         this.state = {
-            inSelectionGrid : this.props.characterList.map((name)=>[name,false]),
+            inSelectionGrid : this.props.characterList.map((name)=> ({characterName: name, row: -1, transparent: false})),
             inTierListGrid : [],
             hoveredCharacter: null,
             draggedCharacter: null,
@@ -20,33 +20,34 @@ export default class WindowGrid extends React.Component{
         let hoveredCharacter = this.state.hoveredCharacter;
         if(currentCharacter === hoveredCharacter){
             if(currentRow === -1){
-                let index = newInSelectionGrid.findIndex((character) => hoveredCharacter === character[0]);
-                newInSelectionGrid.splice(index,1,[currentCharacter,transparent]);
+                let index = newInSelectionGrid.findIndex((icon) => hoveredCharacter === icon.characterName);
+                newInSelectionGrid.splice(index,1,{characterName: currentCharacter,row: currentRow,transparent:transparent});
             }
             else{
-                let index = newInTierListGrid.findIndex((character) => character[0] === hoveredCharacter);
-                newInTierListGrid.splice(index,1,[currentCharacter,currentRow,transparent]);
+                let index = newInTierListGrid.findIndex((icon) => hoveredCharacter === icon.characterName);
+                newInTierListGrid.splice(index,1,{characterName: currentCharacter,row: currentRow,transparent:transparent});
             }
         }      
         else{
-            newInSelectionGrid = newInSelectionGrid.filter( character => character[0] !== currentCharacter);
-            newInTierListGrid = newInTierListGrid.filter( pair => pair[0] !== currentCharacter);
+            newInSelectionGrid = newInSelectionGrid.filter( icon => currentCharacter !== icon.characterName);
+            newInTierListGrid = newInTierListGrid.filter( icon => currentCharacter !== icon.characterName);
             if(currentRow === -1){
                 if(hoveredCharacter === null){
-                    newInSelectionGrid.push([currentCharacter,transparent]);
+                    newInSelectionGrid.push({characterName: currentCharacter,row: currentRow,transparent:transparent});
                 }
                 else{
-                    let index = newInSelectionGrid.findIndex((character) => hoveredCharacter === character[0]);
-                    newInSelectionGrid.splice(index,0,[currentCharacter,transparent]);
+                    let index = newInSelectionGrid.findIndex((icon) => hoveredCharacter === icon.characterName);
+                    newInSelectionGrid.splice(index,0,{characterName: currentCharacter,row: currentRow,transparent:transparent});
                 }
             }
             else{
                 if(hoveredCharacter === null){
-                    newInTierListGrid.push([currentCharacter,currentRow,transparent]);
+                    console.log("pushing icon");
+                    newInTierListGrid.push({characterName: currentCharacter,row: currentRow,transparent:transparent});
                 }
                 else{
-                    let index = newInTierListGrid.findIndex((character) => character[0] === hoveredCharacter);
-                    newInTierListGrid.splice(index,0,[currentCharacter,currentRow,transparent]);
+                    let index = newInTierListGrid.findIndex((icon) => hoveredCharacter === icon.characterName);
+                    newInTierListGrid.splice(index,0,{characterName: currentCharacter,row: currentRow,transparent:transparent});
                 }
             }
         }
@@ -92,17 +93,17 @@ export default class WindowGrid extends React.Component{
         let newInSelectionGrid = this.state.inSelectionGrid;
         let newInTierListGrid = this.state.inTierListGrid;
         //return icons from reset row to the selection grid
-        let returnedIcons = newInTierListGrid.filter((pair) => pair[1] === rowNumber);
-        returnedIcons = returnedIcons.map((pair) => [pair[0],false]);
+        let returnedIcons = newInTierListGrid.filter((icons) => icons.row === rowNumber);
         newInSelectionGrid.push(...returnedIcons);
         //filter out items from tierlistgrid that are in the reset row
-        newInTierListGrid = newInTierListGrid.filter((pair) => pair[1] !== rowNumber);
+        newInTierListGrid = newInTierListGrid.filter((icons) => icons.row !== rowNumber);
         return({newInSelectionGrid,newInTierListGrid});
     }
     deleteRow(rowNumber){
         let {newInSelectionGrid,newInTierListGrid} = this.clearRowIcons(rowNumber);
         //decrement all row numbers larger than the deleted row
-        newInTierListGrid = newInTierListGrid.map((pair) => pair[1]>rowNumber?[pair[0],pair[1]-1,false]:[pair[0],pair[1]],false);
+        //newInTierListGrid = newInTierListGrid.map((pair) => pair[1]>rowNumber?[pair[0],pair[1]-1,false]:[pair[0],pair[1]],false);
+        newInTierListGrid = newInTierListGrid.map((icons) => icons.row > rowNumber? {characterName:icons.characterName, row:icons.row-1, transparent:false}:{characterName:icons.characterName, row:icons.row, transparent:false});
         this.setState({
             inTierListGrid : newInTierListGrid,
             inSelectionGrid : newInSelectionGrid,
@@ -118,12 +119,15 @@ export default class WindowGrid extends React.Component{
     insertRow(rowNumber){
         let newInTierListGrid = this.state.inTierListGrid;
         //shift all icons for the rows below the current row down 1
-        newInTierListGrid = newInTierListGrid.map((pair) => pair[1]>=rowNumber?[pair[0],pair[1]+1]:[pair[0],pair[1]]);
+        //newInTierListGrid = newInTierListGrid.map((pair) => pair[1]>=rowNumber?[pair[0],pair[1]+1]:[pair[0],pair[1]]);
+        newInTierListGrid = newInTierListGrid.map((icons) => icons.row >= rowNumber?{characterName:icons.characterName,row:icons.row+1,transparent:false}:{characterName:icons.characterName,row:icons.row,transparent:false})
         this.setState({
             inTierListGrid : newInTierListGrid,
         })
     }
     render(){
+        console.log(this.state.inTierListGrid);
+        console.log(this.state.inSelectionGrid);
         return(
             <div className = "contentBody">
                 <TierListChart 

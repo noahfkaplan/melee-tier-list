@@ -34,8 +34,7 @@ export default class TierListChart extends React.Component{
     createRows(){
         let rows = [];
         for(let i = 0; i < this.state.rowCount; i++){
-            let characters = this.props.characterList.filter((pair) => pair[1] === i);
-            characters = characters.map((pair)=>[pair[0], pair[2]]);
+            let characters = this.props.characterList.filter((icons) => i === icons.row);
             rows.push(
                 <TierListRow
                     key = {i} 
