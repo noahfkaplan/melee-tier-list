@@ -14,7 +14,6 @@ export default class WindowGrid extends React.Component{
         };
     };
     moveCharacters(currentCharacter,currentRow, transparent){
-        console.log("moving characters");
         let newInSelectionGrid = this.state.inSelectionGrid.slice();
         let newInTierListGrid = this.state.inTierListGrid.slice();
         let hoveredCharacter = this.state.hoveredCharacter;
@@ -42,7 +41,6 @@ export default class WindowGrid extends React.Component{
             }
             else{
                 if(hoveredCharacter === null){
-                    console.log("pushing icon");
                     newInTierListGrid.push({characterName: currentCharacter,row: currentRow,transparent:transparent});
                 }
                 else{
@@ -126,8 +124,6 @@ export default class WindowGrid extends React.Component{
         })
     }
     render(){
-        console.log(this.state.inTierListGrid);
-        console.log(this.state.inSelectionGrid);
         return(
             <div className = "contentBody">
                 <TierListChart 
