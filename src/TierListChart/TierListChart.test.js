@@ -10,7 +10,13 @@ const setup = (characterList) => {
 afterEach(cleanup)
 
 test("It should renders the correct icons for each row", ()=>{
-    let characterList = [["yoshi",0],["bowser",1],["falcon",2],["luigi",3],["peach",4],["mario",5]];
+    let characterList = [
+        {characterName: "yoshi",row: 0,transparent:false},
+        {characterName: "bowser",row: 1,transparent:false},
+        {characterName: "falcon",row: 2,transparent:false},
+        {characterName: "luigi",row: 3,transparent:false},
+        {characterName: "peach",row: 4,transparent:false},
+        {characterName: "mario",row: 5,transparent:false}];
     const {getByAltText} = setup(characterList);
     
     const yoshi = getByAltText("yoshi");
