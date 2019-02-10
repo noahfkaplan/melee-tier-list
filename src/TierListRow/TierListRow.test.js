@@ -10,7 +10,9 @@ const setup = (characters) => {
 afterEach(cleanup)
 
 test("It should render the correct icons", ()=>{
-    const characters = [["fox",false],["falco",false]];
+    const characters = 
+        [{characterName: "fox",row: -1,transparent: false},
+        {characterName: "falco",row: -1,transparent: false}];
     const {getByAltText} = setup(characters);
     const fox = getByAltText("fox");
     const falco = getByAltText("falco");
@@ -18,14 +20,14 @@ test("It should render the correct icons", ()=>{
     expect(falco).toBeDefined();
 });
 test("It should highlight on dragOver", ()=>{
-    const {getByTestId} = setup([["fox",false]]);
+    const {getByTestId} = setup([{characterName: "fox",row: -1,transparent: false}]);
     let row = getByTestId("row-not-highlighted");
     fireEvent.dragOver(row)
     row = getByTestId("row-highlighted");
     expect(row).toBeDefined();
 });
 test("It should stop highlighting on dragLeave", ()=>{
-    const {getByTestId} = setup([["fox",false]]);
+    const {getByTestId} = setup([{characterName: "fox",row: -1,transparent: false}]);
     let row = getByTestId("row-not-highlighted");
     fireEvent.dragOver(row)
     row = getByTestId("row-highlighted");
