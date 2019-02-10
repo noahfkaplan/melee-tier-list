@@ -3,7 +3,7 @@ import TierListRow from "./TierListRow"
 import { render, fireEvent, cleanup } from "react-testing-library";
 
 const setup = (characters) => {
-    const {getByAltText, getByTestId} = render(<TierListRow characters = {characters}/>);
+    const {getByAltText, getByTestId} = render(<TierListRow onDragOverRow = {jest.fn()} characters = {characters}/>);
     return {getByAltText, getByTestId};
 }
 
@@ -11,8 +11,8 @@ afterEach(cleanup)
 
 test("It should render the correct icons", ()=>{
     const characters = 
-        [{characterName: "fox",row: -1,transparent: false},
-        {characterName: "falco",row: -1,transparent: false}];
+        [{characterName: "fox",row: 1,transparent: false},
+        {characterName: "falco",row: 1,transparent: false}];
     const {getByAltText} = setup(characters);
     const fox = getByAltText("fox");
     const falco = getByAltText("falco");
