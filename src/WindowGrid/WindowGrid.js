@@ -117,7 +117,6 @@ export default class WindowGrid extends React.Component{
     insertRow(rowNumber){
         let newInTierListGrid = this.state.inTierListGrid;
         //shift all icons for the rows below the current row down 1
-        //newInTierListGrid = newInTierListGrid.map((pair) => pair[1]>=rowNumber?[pair[0],pair[1]+1]:[pair[0],pair[1]]);
         newInTierListGrid = newInTierListGrid.map((icons) => icons.row >= rowNumber?{characterName:icons.characterName,row:icons.row+1,transparent:false}:{characterName:icons.characterName,row:icons.row,transparent:false})
         this.setState({
             inTierListGrid : newInTierListGrid,
