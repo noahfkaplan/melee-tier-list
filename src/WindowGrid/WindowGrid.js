@@ -13,6 +13,7 @@ export default class WindowGrid extends React.Component{
         };
     };
     moveCharacters(currentCharacter,currentRow, transparent){
+        if(currentCharacter === null) return;
         let newCharacters = this.state.characters.slice();
         let hoveredCharacter = this.state.hoveredCharacter;
         if(currentCharacter === hoveredCharacter){
