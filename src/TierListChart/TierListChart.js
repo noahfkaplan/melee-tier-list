@@ -53,25 +53,29 @@ export default class TierListChart extends React.Component{
         return rows;
     }
     insertRow(row){
-        this.props.insertRow(row);
-        this.defaultPlaceHolderText.splice(row,0,"new");
-        let newLabelTexts = this.state.labelTexts;
-        newLabelTexts.splice(row,0,"");
-        this.setState({
-            rowCount: this.state.rowCount+1,
-            labelTexts: newLabelTexts,
-        })
+        if(this.state.rowCount < 10){//set max row count to 10
+            this.props.insertRow(row);
+            this.defaultPlaceHolderText.splice(row,0,"new");
+            let newLabelTexts = this.state.labelTexts;
+            newLabelTexts.splice(row,0,"");
+            this.setState({
+                rowCount: this.state.rowCount+1,
+                labelTexts: newLabelTexts,
+            });
+        }   
     }
     deleteRow(row){
-        this.props.deleteRow(row);
-        this.defaultPlaceHolderText.splice(row,1);
-        let newLabelTexts = this.state.labelTexts;
-        newLabelTexts.splice(row,1);
+        if(this.state.rowCount > 3){//set min row count to 3
+            this.props.deleteRow(row);
+            this.defaultPlaceHolderText.splice(row,1);
+            let newLabelTexts = this.state.labelTexts;
+            newLabelTexts.splice(row,1);
 
-        this.setState({
-            rowCount: this.state.rowCount-1,
-            labelTexts: newLabelTexts,
-        })
+            this.setState({
+                rowCount: this.state.rowCount-1,
+                labelTexts: newLabelTexts,
+            });
+        }
     }
     renderContextMenu = () => {
         let menu = null;
