@@ -37,10 +37,17 @@ export default class WindowGrid extends React.Component{
     onDragStart(name){
         this.setState({draggedCharacter: name, hoveredCharacter: null});
     }
-    onDrop(row){
+    onDrop(){
         let draggedCharacter = this.state.draggedCharacter;
-        this.moveCharacters(draggedCharacter,row,false);
-        this.setState({draggedCharacter: null, hoveredCharacter: null,currentRow: -1});
+        let newCharacters = this.state.characters.slice();
+        console.log(newCharacters);
+        newCharacters.map((character) => character.characterName === draggedCharacter? character.transparent = false: null);
+        this.setState({
+            characters: newCharacters,
+            draggedCharacter: null, 
+            hoveredCharacter: null,
+            currentRow: -1,
+        });
     }
     onDragOverIcon(ev, hoveredCharacter, row){
         let draggedCharacter = this.state.draggedCharacter;
@@ -106,7 +113,7 @@ export default class WindowGrid extends React.Component{
                 <TierListChart 
                     characterList = {this.state.characters.filter((icons) => icons.row !== -1)} 
                     onDragStart = {(name) => this.onDragStart(name)}
-                    onDrop = {(row) => this.onDrop(row)}
+                    onDrop = {() => this.onDrop()}
                     onDragOverIcon = {(e,character,row) =>this.onDragOverIcon(e,character,row)}
                     onDragOverRow = {(row) => this.onDragOverRow(row)}
                     onDragLeaveIcon = {(e)=>this.onDragLeaveIcon(e)}
@@ -116,7 +123,7 @@ export default class WindowGrid extends React.Component{
                 <CharacterSelectionGrid 
                     characterList = {this.state.characters.filter((icons) => icons.row === -1)}
                     onDragStart = {(name) => this.onDragStart(name)}
-                    onDrop = {(row) => this.onDrop(row)}
+                    onDrop = {() => this.onDrop()}
                     onDragOverIcon = {(e,character,row) =>this.onDragOverIcon(e,character,row)}
                     onDragLeaveIcon = {(e)=>this.onDragLeaveIcon(e)}/>
             </div>
