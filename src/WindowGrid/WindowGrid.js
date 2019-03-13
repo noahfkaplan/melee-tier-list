@@ -1,6 +1,7 @@
 import React from "react"
 import CharacterSelectionGrid from "../CharacterSelectionGrid/CharacterSelectionGrid"
 import TierListChart from "../TierListChart/TierListChart"
+import Toolbar from "../Toolbar/Toolbar"
 
 export default class WindowGrid extends React.Component{
     constructor(props){
@@ -110,6 +111,7 @@ export default class WindowGrid extends React.Component{
     render(){
         return(
             <div className = "contentBody">
+                <Toolbar/>
                 <TierListChart 
                     characterList = {this.state.characters.filter((icons) => icons.row !== -1)} 
                     onDragStart = {(name) => this.onDragStart(name)}

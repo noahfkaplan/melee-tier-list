@@ -17,7 +17,12 @@ test("It renders the passed in character names as Icons", ()=>{
     expect(foxIcon).toBeDefined();
     expect(yoshiIcon).toBeDefined();
 });
-
+test("It renders a toolbar", ()=>{
+    const characterList = ["fox"];
+    const {getByTestId} = setup(characterList);
+    const toolbar = getByTestId('ToolBarWrapper');
+    expect(toolbar).toBeDefined();
+});
 test("It renders a character selection grid", ()=> {
     const characterList = ["fox"];
     const {getByTestId} = setup(characterList);
