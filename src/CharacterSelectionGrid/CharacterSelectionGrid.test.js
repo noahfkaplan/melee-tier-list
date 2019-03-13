@@ -42,11 +42,11 @@ test("It should pass the passed in onDragLeave function to each characterIcon", 
     fireEvent.dragLeave(fox);
     expect(dragLeave).toBeCalled();
 });
-test("It should call passed in drop function with -1", () =>{
+test("It should call passed in drop function", () =>{
     const characterList = [{characterName: "fox",row: -1,transparent: false}];
     const drop = jest.fn();
     const {getByTestId} = setup(characterList, drop,jest.fn(),jest.fn());
     const grid = getByTestId("CharacterSelectionGrid");
     fireEvent.drop(grid);
-    expect(drop).toBeCalledWith(-1);
+    expect(drop).toBeCalled();
 });
