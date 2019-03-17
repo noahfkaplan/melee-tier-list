@@ -1,0 +1,11 @@
+C:\Users\noahfkaplan\Learning Projects\melee-tier-list\MeleeTierListServer\MeleeTierListServer\bin\Debug\netcoreapp2.0\MeleeTierListServer.deps.json
+C:\Users\noahfkaplan\Learning Projects\melee-tier-list\MeleeTierListServer\MeleeTierListServer\bin\Debug\netcoreapp2.0\MeleeTierListServer.runtimeconfig.json
+C:\Users\noahfkaplan\Learning Projects\melee-tier-list\MeleeTierListServer\MeleeTierListServer\bin\Debug\netcoreapp2.0\MeleeTierListServer.runtimeconfig.dev.json
+C:\Users\noahfkaplan\Learning Projects\melee-tier-list\MeleeTierListServer\MeleeTierListServer\bin\Debug\netcoreapp2.0\MeleeTierListServer.dll
+C:\Users\noahfkaplan\Learning Projects\melee-tier-list\MeleeTierListServer\MeleeTierListServer\bin\Debug\netcoreapp2.0\MeleeTierListServer.pdb
+C:\Users\noahfkaplan\Learning Projects\melee-tier-list\MeleeTierListServer\MeleeTierListServer\obj\Debug\netcoreapp2.0\MeleeTierListServer.csprojResolveAssemblyReference.cache
+C:\Users\noahfkaplan\Learning Projects\melee-tier-list\MeleeTierListServer\MeleeTierListServer\obj\Debug\netcoreapp2.0\MeleeTierListServer.csproj.CoreCompileInputs.cache
+C:\Users\noahfkaplan\Learning Projects\melee-tier-list\MeleeTierListServer\MeleeTierListServer\obj\Debug\netcoreapp2.0\MeleeTierListServer.AssemblyInfoInputs.cache
+C:\Users\noahfkaplan\Learning Projects\melee-tier-list\MeleeTierListServer\MeleeTierListServer\obj\Debug\netcoreapp2.0\MeleeTierListServer.AssemblyInfo.cs
+C:\Users\noahfkaplan\Learning Projects\melee-tier-list\MeleeTierListServer\MeleeTierListServer\obj\Debug\netcoreapp2.0\MeleeTierListServer.dll
+C:\Users\noahfkaplan\Learning Projects\melee-tier-list\MeleeTierListServer\MeleeTierListServer\obj\Debug\netcoreapp2.0\MeleeTierListServer.pdb
