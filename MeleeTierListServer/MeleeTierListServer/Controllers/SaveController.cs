@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace MeleeTierListServer.Controllers
 {
     [Route("api/[controller]")]
-    public class ValuesController : Controller
+    public class SaveController : Controller
     {
         // GET api/values
         [HttpGet]
