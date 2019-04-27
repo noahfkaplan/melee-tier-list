@@ -2,6 +2,7 @@ import React from "react"
 import CharacterSelectionGrid from "../CharacterSelectionGrid/CharacterSelectionGrid"
 import TierListChart from "../TierListChart/TierListChart"
 import Toolbar from "../Toolbar/Toolbar"
+import Popup from "../Popup/Popup"
 
 export default class WindowGrid extends React.Component{
     constructor(props){
@@ -11,8 +12,14 @@ export default class WindowGrid extends React.Component{
             hoveredCharacter: null,
             draggedCharacter: null,
             currentRow: -1,
+            showPopup: false,
         };
     };
+    togglePopup() {
+        this.setState({
+          showPopup: !this.state.showPopup
+        });
+      }
     moveCharacters(currentCharacter,currentRow, transparent){
         if(currentCharacter === null) return;
         let newCharacters = this.state.characters.slice();
@@ -111,7 +118,14 @@ export default class WindowGrid extends React.Component{
     render(){
         return(
             <div className = "contentBody">
-                <Toolbar/>
+                {this.state.showPopup ? 
+                    <Popup
+                        text='This functionality is currently unavailable'
+                        closePopup={() => this.togglePopup()}
+                    />
+                    : null
+                }
+                <Toolbar save = {() => this.togglePopup()} search = {() => this.togglePopup()}/>
                 <TierListChart 
                     characterList = {this.state.characters.filter((icons) => icons.row !== -1)} 
                     onDragStart = {(name) => this.onDragStart(name)}
