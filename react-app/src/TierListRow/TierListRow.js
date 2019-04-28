@@ -1,6 +1,6 @@
 import React from "react"
-import RowLabel from "../RowLabel/RowLabel"
-import CharacterCard from "../CharacterCard/CharacterCard"
+import {RowLabel} from "../RowLabel"
+import {CharacterCard} from "../CharacterCard"
 
 export default class TierListRow extends React.Component{
     constructor(props){

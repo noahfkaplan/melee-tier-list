@@ -1,10 +1,10 @@
 import React from "react"
-import CharacterSelectionGrid from "../CharacterSelectionGrid/CharacterSelectionGrid"
+import {CharacterSelectionGrid} from "../CharacterSelectionGrid"
 import TierListChart from "../TierListChart/TierListChart"
 import Toolbar from "../Toolbar/Toolbar"
 import Popup from "../Popup/Popup"
 
-export default class WindowGrid extends React.Component{
+class WindowGrid extends React.Component{
     constructor(props){
         super(props);
         this.state = {
@@ -146,3 +146,4 @@ export default class WindowGrid extends React.Component{
         );
     }
 }
+export {WindowGrid}

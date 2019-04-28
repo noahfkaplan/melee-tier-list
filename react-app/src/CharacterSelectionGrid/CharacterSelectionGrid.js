@@ -1,7 +1,7 @@
 import React from 'react';
-import CharacterCard from "../CharacterCard/CharacterCard";
+import {CharacterCard} from "../CharacterCard";
 
-export default class CharacterSelectionGrid extends React.Component{
+class CharacterSelectionGrid extends React.Component{
     getCharacterIcons(){
         let characterList = this.props.characterList;
         let icons = characterList.map((icon) => {
@@ -26,3 +26,4 @@ export default class CharacterSelectionGrid extends React.Component{
         );    
     }
 }
+export {CharacterSelectionGrid}
