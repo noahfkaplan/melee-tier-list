@@ -1,6 +1,6 @@
 import React from "react"
 
-export default function Toolbar(props){
+function Toolbar(props){
     return(
         <div className = 'toolbarWrapper' data-testid ='ToolBarWrapper'>
             <button className = 'toolbarButton' onClick = {props.save}>Save</button>
@@ -11,3 +11,4 @@ export default function Toolbar(props){
         </div>
     );
 }
+export {Toolbar}

@@ -1,6 +1,6 @@
 import React from "react"
 import {render, fireEvent} from "react-testing-library"
-import RowLabel from "./RowLabel"
+import {RowLabel} from "./RowLabel"
 
 const setup = (placeholderText, text, onClick) => {
     const {getByPlaceholderText,getByText, getByTestId} = render(<RowLabel placeholder = {placeholderText} text = {text} onClick = {onClick}></RowLabel>);

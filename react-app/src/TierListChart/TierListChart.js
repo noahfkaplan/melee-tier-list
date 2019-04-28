@@ -1,8 +1,8 @@
 import React from "react"
-import TierListRow from "../TierListRow/TierListRow"
-import ContextMenu from "../ContextMenu/ContextMenu"
+import {TierListRow} from "../TierListRow"
+import {ContextMenu} from "../ContextMenu"
 
-export default class TierListChart extends React.Component{
+class TierListChart extends React.Component{
     constructor(props){
         super(props);
         this.defaultPlaceHolderText = ['S','A','B','C','D','F'];
@@ -102,3 +102,4 @@ export default class TierListChart extends React.Component{
         );
     }
 }
+export {TierListChart}

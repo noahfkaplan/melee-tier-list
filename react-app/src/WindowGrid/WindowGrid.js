@@ -1,8 +1,8 @@
 import React from "react"
 import {CharacterSelectionGrid} from "../CharacterSelectionGrid"
-import TierListChart from "../TierListChart/TierListChart"
-import Toolbar from "../Toolbar/Toolbar"
-import Popup from "../Popup/Popup"
+import {TierListChart} from "../TierListChart"
+import {Toolbar} from "../Toolbar"
+import {Popup} from "../Popup"
 
 class WindowGrid extends React.Component{
     constructor(props){

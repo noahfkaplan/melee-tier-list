@@ -1,5 +1,5 @@
 import React from "react"
-import CharacterSelectionGrid from "./CharacterSelectionGrid"
+import {CharacterSelectionGrid} from "./CharacterSelectionGrid"
 import { render, fireEvent, cleanup } from "react-testing-library";
 
 const setup = (characterList, drop,dragOver,dragLeave) => {

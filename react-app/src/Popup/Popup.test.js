@@ -1,6 +1,6 @@
 import React from "react"
 import {render, fireEvent} from "react-testing-library"
-import Popup from "./Popup"
+import {Popup} from "./Popup"
 
 const setup = (text, onClick) =>{
     const {getByText} = render(<Popup closePopup = {onClick} text = {text}></Popup>);

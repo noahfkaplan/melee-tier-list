@@ -1,6 +1,6 @@
 import React from "react"
 
-export default class ContextMenu extends React.Component{
+class ContextMenu extends React.Component{
     constructor(props){
         super(props);
         this.menuOptionNames = props.menuOptionNames;
@@ -32,3 +32,4 @@ export default class ContextMenu extends React.Component{
         );
     }
 }
+export {ContextMenu}
