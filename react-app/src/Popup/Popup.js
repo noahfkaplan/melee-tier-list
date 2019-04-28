@@ -1,6 +1,6 @@
 import React from "react"
 
-export default function Popup(props){
+function Popup(props){
     return (
       <div className='popup'>
         <div className='popup_inner'>
@@ -10,3 +10,4 @@ export default function Popup(props){
       </div>
     );
 }
+export {Popup}

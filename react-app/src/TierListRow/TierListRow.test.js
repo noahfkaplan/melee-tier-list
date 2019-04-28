@@ -1,5 +1,5 @@
 import React from "react"
-import TierListRow from "./TierListRow"
+import {TierListRow} from "./TierListRow"
 import { render, fireEvent, cleanup } from "react-testing-library";
 
 const setup = (characters) => {

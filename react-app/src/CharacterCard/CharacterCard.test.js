@@ -1,5 +1,5 @@
 import React from "react"
-import CharacterCard from "./CharacterCard"
+import {CharacterCard} from "./CharacterCard"
 import { render, fireEvent, cleanup } from "react-testing-library";
 
 const setup = (characterName, dragOver, dragLeave) => {

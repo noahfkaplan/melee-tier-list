@@ -1,5 +1,5 @@
 import React from "react"
-import TierListChart from "./TierListChart"
+import {TierListChart} from "./TierListChart"
 import { render, cleanup } from "react-testing-library";
 
 const setup = (characterList) => {

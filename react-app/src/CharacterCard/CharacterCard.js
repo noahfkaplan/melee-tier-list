@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default class CharacterCard extends React.Component{
+class CharacterCard extends React.Component{
     constructor(props){
         super(props);
         this.characterName = props.name;
@@ -18,3 +18,4 @@ export default class CharacterCard extends React.Component{
         );
     }
 }
+export {CharacterCard};

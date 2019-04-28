@@ -1,5 +1,5 @@
 import React from "react"
-import ContextMenu from "./ContextMenu"
+import {ContextMenu} from "./ContextMenu"
 import { render, fireEvent, cleanup } from "react-testing-library";
 
 const setup = (contextMenuNames, contextMenuFunctions) => {

@@ -1,5 +1,5 @@
 import React from "react"
-import WindowGrid from "./WindowGrid"
+import {WindowGrid} from "./WindowGrid"
 import { render, cleanup } from "react-testing-library";
 
 const setup = (characterList) => {
