@@ -3,7 +3,7 @@ body{
 }
 .characterImg{
   height: 82px;
-  width:82px;
+  width:82px;  
   margin-top: 4px;
 }
 .characterImgTransparent{
@@ -13,23 +13,24 @@ body{
   opacity: .5;
 }
 .characterIcon{
-  height: 33%;
-  width: 11%;
 }
 .characterSelectionGrid{
   display: flex;
-  align-self: center;
   flex-direction: row;
   flex-wrap: wrap;
-  justify-content: center;
-  padding: 25px;
-  width: 100%;
-  max-width: 750px;
-  min-height: 100px;
+  align-content: flex-start;
+  padding: 20px;
+  width: 35%;  
+  border: 1px solid black;
 }
 .contentBody{
   display:flex;
   flex-direction: column;  
+  background-color: rgb(30, 32, 32);
+}
+.tierListArea{
+  display: flex;
+  flex-direction: row;
   background-color: rgb(30, 32, 32);
 }
 .tierListRow{
@@ -79,6 +80,7 @@ body{
 }
 .tierListChart{
   position: relative;
+  width: 65%;
 }
 .contextMenu{
   background-color: #D3D3D3;
@@ -107,9 +109,9 @@ body{
 }
 .toolbarWrapper{
   display: flex;
-  border: 1px solid black;
   flex-direction:row;
   justify-content:space-between;
+  border-left: 1px solid black;
 }
 .toolbarText{
   background-color:rgb(226, 238, 238);

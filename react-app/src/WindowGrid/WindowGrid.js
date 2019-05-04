@@ -126,22 +126,24 @@ class WindowGrid extends React.Component{
                     : null
                 }
                 <Toolbar save = {() => this.togglePopup()} search = {() => this.togglePopup()}/>
-                <TierListChart 
-                    characterList = {this.state.characters.filter((icons) => icons.row !== -1)} 
-                    onDragStart = {(name) => this.onDragStart(name)}
-                    onDrop = {() => this.onDrop()}
-                    onDragOverIcon = {(e,character,row) =>this.onDragOverIcon(e,character,row)}
-                    onDragOverRow = {(row) => this.onDragOverRow(row)}
-                    onDragLeaveIcon = {(e)=>this.onDragLeaveIcon(e)}
-                    resetRow = {(row)=>this.resetRow(row)}
-                    deleteRow = {(row)=>this.deleteRow(row)}
-                    insertRow = {(row)=>this.insertRow(row)}/>
-                <CharacterSelectionGrid 
-                    characterList = {this.state.characters.filter((icons) => icons.row === -1)}
-                    onDragStart = {(name) => this.onDragStart(name)}
-                    onDrop = {() => this.onDrop()}
-                    onDragOverIcon = {(e,character,row) =>this.onDragOverIcon(e,character,row)}
-                    onDragLeaveIcon = {(e)=>this.onDragLeaveIcon(e)}/>
+                <div className = "tierListArea">
+                    <TierListChart 
+                        characterList = {this.state.characters.filter((icons) => icons.row !== -1)} 
+                        onDragStart = {(name) => this.onDragStart(name)}
+                        onDrop = {() => this.onDrop()}
+                        onDragOverIcon = {(e,character,row) =>this.onDragOverIcon(e,character,row)}
+                        onDragOverRow = {(row) => this.onDragOverRow(row)}
+                        onDragLeaveIcon = {(e)=>this.onDragLeaveIcon(e)}
+                        resetRow = {(row)=>this.resetRow(row)}
+                        deleteRow = {(row)=>this.deleteRow(row)}
+                        insertRow = {(row)=>this.insertRow(row)}/>
+                    <CharacterSelectionGrid 
+                        characterList = {this.state.characters.filter((icons) => icons.row === -1)}
+                        onDragStart = {(name) => this.onDragStart(name)}
+                        onDrop = {() => this.onDrop()}
+                        onDragOverIcon = {(e,character,row) =>this.onDragOverIcon(e,character,row)}
+                        onDragLeaveIcon = {(e)=>this.onDragLeaveIcon(e)}/>
+                </div>  
             </div>
         );
     }
