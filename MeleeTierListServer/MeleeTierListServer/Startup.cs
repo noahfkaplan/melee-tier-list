@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.AspNetCore.Cors.Infrastructure;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 
@@ -19,11 +20,19 @@ namespace MeleeTierListServer
         }
 
         public IConfiguration Configuration { get; }
-
+        private string AllowAnyOrigin = "AllowAnyOrigin";
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc();
+            services.AddCors(options =>
+            {
+                options.AddPolicy("AllowAnyOrigin",
+                    builder =>
+                    {
+                        builder.AllowAnyOrigin();
+                    });
+            });
+                services.AddMvc();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -33,7 +42,7 @@ namespace MeleeTierListServer
             {
                 app.UseDeveloperExceptionPage();
             }
-
+            app.UseCors(AllowAnyOrigin);
             app.UseMvc();
         }
     }

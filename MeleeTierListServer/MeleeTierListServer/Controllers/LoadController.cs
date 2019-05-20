@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace MeleeTierListServer.Controllers
 {
+
     [Route("api/[controller]")]
     public class LoadController : Controller
     {

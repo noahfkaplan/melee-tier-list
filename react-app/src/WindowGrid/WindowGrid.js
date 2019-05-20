@@ -15,6 +15,13 @@ class WindowGrid extends React.Component{
             showPopup: false,
         };
     };
+    componentDidMount(){
+        fetch('http://localhost:53414/api/load/test')
+        .then(res => res.json())
+        .then((data) => {
+            console.log(data);
+        });
+    }
     togglePopup() {
         this.setState({
           showPopup: !this.state.showPopup
