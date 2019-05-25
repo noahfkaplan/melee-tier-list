@@ -20,6 +20,11 @@ namespace MeleeTierListServer.Controllers
             characterRepository = new CharacterRepository();
         }
 
+        [HttpGet]
+        public Character[] Get()
+        {
+            return characterRepository.GetInitialCharacters();
+        }
         // GET api/load/5
         [HttpGet("{TierListId}")]
         public Character[] Get(string id)

@@ -16,10 +16,13 @@ class WindowGrid extends React.Component{
         };
     };
     componentDidMount(){
-        fetch('http://localhost:53414/api/load/test')
+        fetch('http://localhost:53414/api/load')
         .then(res => res.json())
         .then((data) => {
-            console.log(data);
+            const newCharacters = data.map((character) => ({characterName: character.name, row: character.tier, transparent:false}));
+            this.setState({
+                characters: newCharacters,
+            });
         });
     }
     togglePopup() {
