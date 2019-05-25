@@ -8,7 +8,7 @@ class WindowGrid extends React.Component{
     constructor(props){
         super(props);
         this.state = {
-            characters : this.props.characterList.map((name)=> ({characterName: name, row: -1, transparent: false})),
+            characters: [{characterName: "fox", row: -1, transparent: false}],
             hoveredCharacter: null,
             draggedCharacter: null,
             currentRow: -1,
