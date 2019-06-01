@@ -15,6 +15,16 @@ class WindowGrid extends React.Component{
             showPopup: false,
         };
     };
+    loadExistingList(tierListId){
+        fetch('http://localhost:53414/api/load/'+tierListId)
+        .then(res => res.json())
+        .then((data) => {
+            const newCharacters = data.map((character) => ({characterName: character.name, row: character.tier, transparent:false}));
+            this.setState({
+                characters: newCharacters,
+            });
+        });
+    }
     componentDidMount(){
         fetch('http://localhost:53414/api/load')
         .then(res => res.json())
@@ -26,9 +36,9 @@ class WindowGrid extends React.Component{
         });
     }
     togglePopup() {
-        this.setState({
-          showPopup: !this.state.showPopup
-        });
+        this.setState((state) => ({
+          showPopup: !state.showPopup
+        }));
       }
     moveCharacters(currentCharacter,currentRow, transparent){
         if(currentCharacter === null) return;
@@ -135,7 +145,7 @@ class WindowGrid extends React.Component{
                     />
                     : null
                 }
-                <Toolbar save = {() => this.togglePopup()} search = {() => this.togglePopup()}/>
+                <Toolbar save = {() => this.togglePopup()} search = {() => this.loadExistingList()}/>
                 <div className = "tierListArea">
                     <TierListChart 
                         characterList = {this.state.characters.filter((icons) => icons.row !== -1)} 
