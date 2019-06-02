@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace MeleeTierListServer.Controllers
 {
+
     [Route("api/[controller]")]
     public class LoadController : Controller
     {
@@ -19,6 +20,11 @@ namespace MeleeTierListServer.Controllers
             characterRepository = new CharacterRepository();
         }
 
+        [HttpGet]
+        public Character[] Get()
+        {
+            return characterRepository.GetInitialCharacters();
+        }
         // GET api/load/5
         [HttpGet("{TierListId}")]
         public Character[] Get(string id)

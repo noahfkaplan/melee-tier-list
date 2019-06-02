@@ -9,14 +9,6 @@ const setup = (characterList) => {
 
 afterEach(cleanup)
 
-test("It renders the passed in character names as Icons", ()=>{
-    const characterList = ["fox","yoshi"];
-    const {getByAltText} = setup(characterList);
-    const foxIcon = getByAltText(characterList[0]);
-    const yoshiIcon = getByAltText(characterList[1]);
-    expect(foxIcon).toBeDefined();
-    expect(yoshiIcon).toBeDefined();
-});
 test("It renders a toolbar", ()=>{
     const characterList = ["fox"];
     const {getByTestId} = setup(characterList);
