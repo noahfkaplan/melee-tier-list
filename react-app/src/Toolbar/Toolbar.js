@@ -3,10 +3,10 @@ import React from "react"
 class Toolbar extends React.Component{
     constructor(props){
         super(props);        
-        this.state = {value: ''};
+        this.state = {searchText: ''};
     }
     handleChange(event){
-        this.setState({value: event.target.value});
+        this.setState({searchText: event.target.value});
     }
     render(){
         return(
