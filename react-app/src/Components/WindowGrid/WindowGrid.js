@@ -3,6 +3,7 @@ import {CharacterSelectionGrid} from "../CharacterSelectionGrid"
 import {TierListChart} from "../TierListChart"
 import {Toolbar} from "../Toolbar"
 import {Popup} from "../Popup"
+import {LoadDefaultCharacterList, LoadExistingCharacterList} from "../../api/LoadCharacters/"
 
 class WindowGrid extends React.Component{
     constructor(props){
@@ -16,23 +17,15 @@ class WindowGrid extends React.Component{
         };
     };
     loadExistingList(tierListId){
-        fetch('http://localhost:53414/api/load/'+tierListId)
-        .then(res => res.json())
-        .then((data) => {
-            const newCharacters = data.map((character) => ({characterName: character.name, row: character.tier, transparent:false}));
-            this.setState({
-                characters: newCharacters,
-            });
+        let newCharacters = LoadExistingCharacterList(tierListId);
+        this.setState({
+            characters: newCharacters,
         });
     }
-    componentDidMount(){
-        fetch('http://localhost:53414/api/load')
-        .then(res => res.json())
-        .then((data) => {
-            const newCharacters = data.map((character) => ({characterName: character.name, row: character.tier, transparent:false}));
-            this.setState({
-                characters: newCharacters,
-            });
+    async componentDidMount(){
+        let newCharacters = await LoadDefaultCharacterList();
+        this.setState({
+             characters: newCharacters,
         });
     }
     togglePopup() {
@@ -68,7 +61,6 @@ class WindowGrid extends React.Component{
     onDrop(){
         let draggedCharacter = this.state.draggedCharacter;
         let newCharacters = this.state.characters.slice();
-        console.log(newCharacters);
         newCharacters.map((character) => character.characterName === draggedCharacter? character.transparent = false: null);
         this.setState({
             characters: newCharacters,
