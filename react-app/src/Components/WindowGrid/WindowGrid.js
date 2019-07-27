@@ -18,14 +18,12 @@ class WindowGrid extends React.Component{
     };
     loadExistingList(tierListId){
         let newCharacters = LoadExistingCharacterList(tierListId);
-        console.log(newCharacters);
         this.setState({
             characters: newCharacters,
         });
     }
     async componentDidMount(){
         let newCharacters = await LoadDefaultCharacterList();
-        console.log(newCharacters);
         this.setState({
              characters: newCharacters,
         });
@@ -63,7 +61,6 @@ class WindowGrid extends React.Component{
     onDrop(){
         let draggedCharacter = this.state.draggedCharacter;
         let newCharacters = this.state.characters.slice();
-        console.log(newCharacters);
         newCharacters.map((character) => character.characterName === draggedCharacter? character.transparent = false: null);
         this.setState({
             characters: newCharacters,
