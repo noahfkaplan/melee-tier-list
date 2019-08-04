@@ -9,7 +9,7 @@ class WindowGrid extends React.Component{
     constructor(props){
         super(props);
         this.state = {
-            characters: [{characterName: "fox", row: -1, transparent: false}],
+            characters: [],
             hoveredCharacter: null,
             draggedCharacter: null,
             currentRow: -1,
@@ -149,12 +149,13 @@ class WindowGrid extends React.Component{
                         resetRow = {(row)=>this.resetRow(row)}
                         deleteRow = {(row)=>this.deleteRow(row)}
                         insertRow = {(row)=>this.insertRow(row)}/>
+                    {this.state.characters.length > 0 &&
                     <CharacterSelectionGrid 
                         characterList = {this.state.characters.filter((icons) => icons.row === -1)}
                         onDragStart = {(name) => this.onDragStart(name)}
                         onDrop = {() => this.onDrop()}
                         onDragOverIcon = {(e,character,row) =>this.onDragOverIcon(e,character,row)}
-                        onDragLeaveIcon = {(e)=>this.onDragLeaveIcon(e)}/>
+                        onDragLeaveIcon = {(e)=>this.onDragLeaveIcon(e)}/>}
                 </div>  
             </div>
         );
