@@ -1,4 +1,4 @@
-export const LoadDefaultCharacterList = (async() => {
+export const GetDefaultCharacterList = (async() => {
     let newCharacterList = null;
     await fetch('http://localhost:53414/api/load')
         .then(res => res.json())
@@ -8,7 +8,7 @@ export const LoadDefaultCharacterList = (async() => {
     return newCharacterList
 });
 
-export const LoadExistingCharacterList = (async (Id) =>{
+export const GetCharacterListById = (async (Id) =>{
     let newCharacterList = null;
     await fetch('http://localhost:53414/api/load/'+Id)
         .then(res => res.json())
@@ -18,4 +18,4 @@ export const LoadExistingCharacterList = (async (Id) =>{
     return newCharacterList;    
 });
 
-export default {LoadDefaultCharacterList, LoadExistingCharacterList};
+export default {GetDefaultCharacterList, GetCharacterListById};

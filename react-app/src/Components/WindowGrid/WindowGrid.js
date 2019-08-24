@@ -3,7 +3,7 @@ import {CharacterSelectionGrid} from "../CharacterSelectionGrid"
 import {TierListChart} from "../TierListChart"
 import {Toolbar} from "../Toolbar"
 import {Popup} from "../Popup"
-import {LoadDefaultCharacterList, LoadExistingCharacterList} from "../../api/LoadCharacters/"
+import {GetDefaultCharacterList, GetCharacterListById} from "../../api/Services/CharacterService";
 
 class WindowGrid extends React.Component{
     constructor(props){
@@ -17,13 +17,13 @@ class WindowGrid extends React.Component{
         };
     };
     loadExistingList(tierListId){
-        let newCharacters = LoadExistingCharacterList(tierListId);
+        let newCharacters = GetCharacterListById(tierListId);
         this.setState({
             characters: newCharacters,
         });
     }
     async componentDidMount(){
-        let newCharacters = await LoadDefaultCharacterList();
+        let newCharacters = await GetDefaultCharacterList();
         this.setState({
              characters: newCharacters,
         });
